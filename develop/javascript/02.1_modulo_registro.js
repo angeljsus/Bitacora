@@ -187,8 +187,8 @@ function desplegaDiasConStatus(inicioHome, rfc, status){
 			return new Promise(function(resolve, reject){
 				// aqui se trabajarán los elementos html
 				const cantDiasL = document.getElementById('cantDiasL');
-				const divSetDate = document.getElementById('divSetDate');
 				const infoCantidades = document.getElementById('infoCantidades');
+				let bound = divSetDate.getBoundingClientRect();
 				// const inicioHomeOffice = document.getElementById('inicioHomeOffice');
 				// inicioHomeOffice.innerHTML = 'Fecha Inicio: ' + obtenFecha(inicioHome, true);
 				cantDiasL.innerHTML = object.length; 
@@ -424,18 +424,15 @@ function obtenerDatosRegistro(date, userApp){
 
 function marcaFechaSeleccionada(fecha){
 	let itemValueFecha = document.getElementsByName('itemValueFecha');
-	// let divSetDate = document.getElementById('divSetDate');
 	let fechaElement = '';
+	let bound = '';
 	if (itemValueFecha) {
 		itemValueFecha.forEach(function(element){
 			fechaElement = element.id.replace(/cambiar/,'');
 			element.classList.remove('date-selected')
 			if (fechaElement == fecha) {
-				// element.getBoundingClientRect();
-				// console.log(element.firstChild)
 				element.classList.add('date-selected')
 			}
-			// console.log(element)
 		})
 	}
 

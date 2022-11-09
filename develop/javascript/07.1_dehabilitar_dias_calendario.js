@@ -34,7 +34,7 @@ const htmlDisableDaysCalendar = () => {
 		<div class="title-similares">
 			<div class="row-title-similar">
 				<div class="item-similar">
-					DESHABILITAR DÍAS
+					ASIGNAR ESTADO DE FECHAS
 				</div>
 			</div>
 			<div class="row-title-similar">
@@ -92,8 +92,9 @@ const htmlDisableDaysCalendar = () => {
 	areaOtrosRegistros.innerHTML = html;
 	// const globalArray = 
 	getDatesSegunStatus()
+	// .then( array => console.log(array) )
 	.then( array => { data.global = array; return data; } )
-	.then( object => getCalendario(data) )
+	.then( object => { getCalendario(object); } )
 	areaOtrosRegistros.style.display = 'flex';
 	areaFechas.style.display = 'none';
 }
@@ -195,28 +196,26 @@ const getDatesSegunStatus = () => {
 	return new Promise( (queryResolve, reject) => {
 		db.transaction( tx => {
 			tx.executeSql('SELECT fecha, capturado FROM TBL_CAMPOS WHERE rfcusuario = ? AND claveusr = ?', [KEY, USER_APP], (tx, results) => {
-				return new Promise( (resolve, reject) => {
-					const object = Object.keys(results.rows);
-					let counter = 1;
-					for (let i = 0, promise = Promise.resolve(); i < object.length; i++) {
-						promise = promise.then( () => {
-							let key = object[i];
-							let split = results.rows[key].fecha.split('-');
-							const dateObject = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
-							dateObject.colorToGroup = getColorStatus(results.rows[key].capturado);
-							object[i] = dateObject;
-						})
-						.then(() => counter++ )
-						.then(cnt => cnt === object.length ? resolve( object ) : '' )
-					}
-				})
-				.then( array => queryResolve(array) )
-				// let resultado = Object.keys(results.rows).map( key => { 
-				// 	let split = results.rows[key].fecha.split('-');
-				// 	const object = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
-				// 	object.colorToGroup = getColorStatus(results.rows[key].capturado);
-				// } );
-				// resolve(resultado) 
+				const object = Object.keys(results.rows);
+				if(object.length > 0){
+					return new Promise( (resolve, reject) => {
+						let counter = 1;
+
+						for (let i = 0, promise = Promise.resolve(); i < object.length; i++) {
+							promise = promise.then( () => {
+								let key = object[i];
+								let split = results.rows[key].fecha.split('-');
+								const dateObject = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
+								dateObject.colorToGroup = getColorStatus(results.rows[key].capturado);
+								object[i] = dateObject;
+							})
+							.then(() => counter++ )
+							.then(cnt => cnt === object.length ? resolve( object ) : '' )
+						}
+					})
+					.then( array => queryResolve(array) )
+				}
+				queryResolve([]);
 			})
 		},err => reject(err) )
 	})

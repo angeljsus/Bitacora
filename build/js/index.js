@@ -306,8 +306,8 @@ function desplegaDiasConStatus(inicioHome, rfc, status) {
     return new Promise(function (resolve, reject) {
       // aqui se trabajarán los elementos html
       var cantDiasL = document.getElementById('cantDiasL');
-      var divSetDate = document.getElementById('divSetDate');
-      var infoCantidades = document.getElementById('infoCantidades'); // const inicioHomeOffice = document.getElementById('inicioHomeOffice');
+      var infoCantidades = document.getElementById('infoCantidades');
+      var bound = divSetDate.getBoundingClientRect(); // const inicioHomeOffice = document.getElementById('inicioHomeOffice');
       // inicioHomeOffice.innerHTML = 'Fecha Inicio: ' + obtenFecha(inicioHome, true);
 
       cantDiasL.innerHTML = object.length;
@@ -520,9 +520,9 @@ function obtenerDatosRegistro(date, userApp) {
 }
 
 function marcaFechaSeleccionada(fecha) {
-  var itemValueFecha = document.getElementsByName('itemValueFecha'); // let divSetDate = document.getElementById('divSetDate');
-
+  var itemValueFecha = document.getElementsByName('itemValueFecha');
   var fechaElement = '';
+  var bound = '';
 
   if (itemValueFecha) {
     itemValueFecha.forEach(function (element) {
@@ -530,11 +530,8 @@ function marcaFechaSeleccionada(fecha) {
       element.classList.remove('date-selected');
 
       if (fechaElement == fecha) {
-        // element.getBoundingClientRect();
-        // console.log(element.firstChild)
         element.classList.add('date-selected');
-      } // console.log(element)
-
+      }
     });
   }
 }
@@ -2664,6 +2661,12 @@ function eliminarUsarioConsulta(rfc, userApp) {
       console.error(err.message);
     }, function () {});
   }).then(function () {
+    db.transaction(function (tx) {
+      tx.executeSql('DELETE FROM TBL_ACTIVIDADES WHERE rfcusuario = ? AND claveusr = ?', [rfc, userApp]);
+    }, function (err) {
+      console.error(err.message);
+    }, function () {});
+  }).then(function () {
     var itemDelete = document.getElementById('code' + rfc);
     itemDelete.remove();
     closeModal();
@@ -3171,14 +3174,15 @@ var htmlDisableDaysCalendar = function htmlDisableDaysCalendar() {
     optionsBarFloar.insertAdjacentHTML('afterbegin', "\n\t\t\t<button id=\"backDates\" class=\"btn-otros\" onclick=\"regresaFechasActual()\">\n\t\t\t\t<span class=\"material-icons\">low_priority</span>\n\t\t\t</button>");
   }
 
-  var html = "\n\t\t<div class=\"title-similares\">\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tDESHABILITAR D\xCDAS\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tMarcar d\xEDas seg\xFAn como se cumpli\xF3 o se cumplir\xE1 la jornada laboral\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"content-disable\">\n\t\t\t<div class=\"content-area\">\n\t\t\t\t<div class=\"calendar-area\" id=\"parentCalendar\"></div>\t\n\t\t\t\t<div class=\"calendar-options\">\n\t\t\t\t\t\t<div class=\"options-select\">\n\t\t\t\t\t\t\t<div class=\"option\">Marcar c\xF3mo:</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 2)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-vacaciones\" ></div>\n\t\t\t\t\t\t\t\t\tVacaciones\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 1)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-permiso\"></div>\n\t\t\t\t\t\t\t\t\tPermiso\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 3)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-oficina\"></div>\n\t\t\t\t\t\t\t\t\tSe labor\xF3 en oficinas\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 10)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark\"></div>\n\t\t\t\t\t\t\t\t\tLimpiar\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\n\t\t\t</div>\n\t\t\t<div class=\"info-area\"></div>\n\t\t</div>\n\t";
+  var html = "\n\t\t<div class=\"title-similares\">\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tASIGNAR ESTADO DE FECHAS\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tMarcar d\xEDas seg\xFAn como se cumpli\xF3 o se cumplir\xE1 la jornada laboral\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"content-disable\">\n\t\t\t<div class=\"content-area\">\n\t\t\t\t<div class=\"calendar-area\" id=\"parentCalendar\"></div>\t\n\t\t\t\t<div class=\"calendar-options\">\n\t\t\t\t\t\t<div class=\"options-select\">\n\t\t\t\t\t\t\t<div class=\"option\">Marcar c\xF3mo:</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 2)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-vacaciones\" ></div>\n\t\t\t\t\t\t\t\t\tVacaciones\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 1)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-permiso\"></div>\n\t\t\t\t\t\t\t\t\tPermiso\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 3)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-oficina\"></div>\n\t\t\t\t\t\t\t\t\tSe labor\xF3 en oficinas\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 10)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark\"></div>\n\t\t\t\t\t\t\t\t\tLimpiar\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\n\t\t\t</div>\n\t\t\t<div class=\"info-area\"></div>\n\t\t</div>\n\t";
   areaOtrosRegistros.innerHTML = html; // const globalArray = 
 
-  getDatesSegunStatus().then(function (array) {
+  getDatesSegunStatus() // .then( array => console.log(array) )
+  .then(function (array) {
     data.global = array;
     return data;
   }).then(function (object) {
-    return getCalendario(data);
+    getCalendario(object);
   });
   areaOtrosRegistros.style.display = 'flex';
   areaFechas.style.display = 'none';
@@ -3289,36 +3293,36 @@ var getDatesSegunStatus = function getDatesSegunStatus() {
   return new Promise(function (queryResolve, reject) {
     db.transaction(function (tx) {
       tx.executeSql('SELECT fecha, capturado FROM TBL_CAMPOS WHERE rfcusuario = ? AND claveusr = ?', [KEY, USER_APP], function (tx, results) {
-        return new Promise(function (resolve, reject) {
-          var object = Object.keys(results.rows);
-          var counter = 1;
+        var object = Object.keys(results.rows);
 
-          var _loop = function _loop(i, _promise) {
-            _promise = _promise.then(function () {
-              var key = object[i];
-              var split = results.rows[key].fecha.split('-');
-              var dateObject = getJsonDate(new Date(split[2], split[1] - 1, split[0]));
-              dateObject.colorToGroup = getColorStatus(results.rows[key].capturado);
-              object[i] = dateObject;
-            }).then(function () {
-              return counter++;
-            }).then(function (cnt) {
-              return cnt === object.length ? resolve(object) : '';
-            });
-            promise = _promise;
-          };
+        if (object.length > 0) {
+          return new Promise(function (resolve, reject) {
+            var counter = 1;
 
-          for (var i = 0, promise = Promise.resolve(); i < object.length; i++) {
-            _loop(i, promise);
-          }
-        }).then(function (array) {
-          return queryResolve(array);
-        }); // let resultado = Object.keys(results.rows).map( key => { 
-        // 	let split = results.rows[key].fecha.split('-');
-        // 	const object = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
-        // 	object.colorToGroup = getColorStatus(results.rows[key].capturado);
-        // } );
-        // resolve(resultado) 
+            var _loop = function _loop(i, _promise) {
+              _promise = _promise.then(function () {
+                var key = object[i];
+                var split = results.rows[key].fecha.split('-');
+                var dateObject = getJsonDate(new Date(split[2], split[1] - 1, split[0]));
+                dateObject.colorToGroup = getColorStatus(results.rows[key].capturado);
+                object[i] = dateObject;
+              }).then(function () {
+                return counter++;
+              }).then(function (cnt) {
+                return cnt === object.length ? resolve(object) : '';
+              });
+              promise = _promise;
+            };
+
+            for (var i = 0, promise = Promise.resolve(); i < object.length; i++) {
+              _loop(i, promise);
+            }
+          }).then(function (array) {
+            return queryResolve(array);
+          });
+        }
+
+        queryResolve([]);
       });
     }, function (err) {
       return reject(err);
@@ -4419,7 +4423,50 @@ var getJsonDate = function getJsonDate(objectDate) {
   object.diagReverse = "".concat(object.year, "/").concat(month, "/").concat(day);
   object["default"] = objectDate;
   object.id = "id-".concat(object.dayMonth, "-").concat(object.month, "-").concat(object.year);
+  object.dia = getStringDia(object.dayWeek);
   return object;
+};
+
+var getStringDia = function getStringDia(dayWeek) {
+  var dias = [{
+    id: 0,
+    nem: 'Do.',
+    string: 'Domingo'
+  }, {
+    id: 1,
+    nem: 'Lu.',
+    string: 'Lunes'
+  }, {
+    id: 2,
+    nem: 'Ma.',
+    string: 'Martes'
+  }, {
+    id: 3,
+    nem: 'Mi.',
+    string: 'Miércoles'
+  }, {
+    id: 4,
+    nem: 'Ju.',
+    string: 'Jueves'
+  }, {
+    id: 5,
+    nem: 'Vi.',
+    string: 'Viernes'
+  }, {
+    id: 6,
+    nem: 'Sá.',
+    string: 'Sábado'
+  }];
+  var i = 0,
+      resultado = 0;
+
+  do {
+    if (dayWeek == dias[i].id) {
+      return dias[i];
+    }
+
+    i++;
+  } while (i < dias.length);
 };
 
 var getStringMonth = function getStringMonth(month) {

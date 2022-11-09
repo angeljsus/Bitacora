@@ -377,7 +377,27 @@ const getJsonDate = objectDate => {
 	object.diagReverse = `${object.year}/${month}/${day}`;
 	object.default = objectDate;
 	object.id = `id-${object.dayMonth}-${object.month}-${object.year}`;
+	object.dia = getStringDia(object.dayWeek)
 	return object;
+}
+
+const getStringDia = dayWeek => {
+	let dias = [
+		{id:0, nem:'Do.', string:'Domingo'},
+		{id:1, nem:'Lu.', string:'Lunes'},
+		{id:2, nem:'Ma.', string:'Martes'},
+		{id:3, nem:'Mi.', string:'Miércoles'},
+		{id:4, nem:'Ju.', string:'Jueves'},
+		{id:5, nem:'Vi.', string:'Viernes'},
+		{id:6, nem:'Sá.', string:'Sábado'},
+	];
+	let i = 0, resultado = 0;
+	do {
+		if (dayWeek == dias[i].id) {
+			return dias[i];
+		}
+		i++;
+	} while(i < dias.length)
 }
 
 const getStringMonth = month => {

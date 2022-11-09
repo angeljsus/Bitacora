@@ -61,6 +61,14 @@ function eliminarUsarioConsulta(rfc, userApp){
 		})
 	})
 	.then(function(){
+		db.transaction( function(tx){
+			tx.executeSql('DELETE FROM TBL_ACTIVIDADES WHERE rfcusuario = ? AND claveusr = ?', [rfc, userApp])
+		}, function(err){
+			console.error(err.message)
+		}, function(){
+		})
+	})
+	.then(function(){
 		const itemDelete = document.getElementById('code' + rfc)
 		itemDelete.remove();
 		closeModal()
