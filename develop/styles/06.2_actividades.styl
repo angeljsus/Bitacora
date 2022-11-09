@@ -1,0 +1,40 @@
+.area-actividades
+		width 100%
+		height 200px
+		display none
+		justify-content center
+		.display-actividades
+			width 80% 
+			height 100%
+			overflow auto
+			display flex
+			flex-wrap wrap
+			align-content flex-start
+			border 2px solid rgba(0,0,0,.2)
+			.item-actividad
+				width 100%
+				// height 30px
+				display flex
+				margin 3px
+				font-size .9em
+				// border 2px solid red
+				.la-actividad
+					flex 1
+					height 100%
+					padding 5px
+					// font-family inherit
+					// font-size inherit
+					// padding 1px 2px
+					border .5px solid rgba(0,0,0,.2)
+				.editable:empty:before
+					content attr(data-placeholder)
+					color gray
+		.btn-add
+			width 30px
+			height 30px
+			font-weight bold
+			border none
+			background #94d2bd
+			&:hover
+				background #264653
+				color #FFFF

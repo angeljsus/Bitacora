@@ -1,0 +1,28 @@
+{
+  "name": "APP_BITACORA_BUILD",
+  "productName": "APP BITACORA",
+  "version": "1.0.0",
+  "description": "Registro de bitácoras del INEGI",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "compile":"electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^19.0.7",
+    "electron-builder": "^22.13.1",
+    "electron-reload": "^2.0.0-alpha.1"
+  },
+  "build":{
+    "appId":"app-bitacora",
+    "win":{
+      "icon":"icons/oasdasd.png"
+    }
+  },
+  "author": "Ángel Aguilar",
+  "license": "ISC",
+  "dependencies": {
+    "exceljs": "^4.3.0",
+    "fs-extra": "^10.0.0"
+  }
+}

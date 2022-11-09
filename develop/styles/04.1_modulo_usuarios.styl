@@ -1,0 +1,60 @@
+.usuarios-container
+	width 40%
+	height 100%
+	display flex
+	// flex-wrap wrap
+	.area-usuarios
+		width 100%
+		height 100%
+		display flex
+		flex-direction column
+		// flex-wrap wrap
+		// align-content flex-start
+		border 1px solid rgba(0,0,0,.1)
+		.title-usuarios
+			width 100%
+			height 30px
+			display flex
+			justify-content center
+			align-items center
+			font-weight bold
+			background #6c757d
+			color #FFFF
+			// border 1px solid red
+		.content-usuarios
+			width 100%
+			flex 1
+			overflow auto
+			.row-user
+				width 100%
+				height 40px
+				display inline-flex
+				color #6c757d
+				// border 2px solid green
+				&:hover
+					background #48cae4
+					font-weight bold
+					color #FFFF
+				.column-user-data
+					flex 1
+					display flex
+					justify-content center
+					align-items center
+					font-weight bold
+					font-size .7em
+					text-align center
+				.column-opt-data
+					width 30px
+					height 100%
+					display flex
+					justify-content center
+					align-items center
+					// border 1px solid
+					span
+						font-size 20px
+						border none
+						&:hover
+							color #023e8a
+							border-radius 10px
+							border 2px solid
+							user-select none

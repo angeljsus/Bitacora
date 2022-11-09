@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+	<!-- <meta http-equiv="Content-Security-Policy" content_security_policy="default-src 'self' style-src 'self' 'unsafe-inline';" > -->
+	<!-- "content_security_policy": "default-src 'self' style-src 'self' 'unsafe-inline';"  -->
+  	<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  	<link rel="stylesheet" href="css/index.css">
+	<title>APP BITACORA</title>
+</head>
+<body>
+	<div id="modales">
+		<!-- <div class="content-csc">
+			<div class="csc-header">header</div>
+			<div class="csc-content">content</div>
+			<div class="csc-options">
+				<button class="csc-option">option</button>
+			</div>
+		</div> -->
+		<!-- <div id="divDateContent" class="modal-fecha"></div> -->
+	</div>
+	<div class="content-main">
+		<div class="main-header">
+			<div class="options-group">
+				<button class="option-item" id="btnRegistrar">REGISTRAR</button>
+				<!-- <button class="option-item" id="btnPendiente">PENDIENTES</button> -->
+				<button class="option-item" id="btnUsuariosr">PERSONAS</button>
+				<!-- <button class="option-item" id="btnActividad">ACTIVIDADES</button> -->
+			</div>
+			<div class="options-b">
+				<!-- <span class="user-name" id="inicioHomeOffice"></span> -->
+				<span class="user-name" id="nombreUsuarioDsp">Cargando..</span>
+				<div class="cerrar-sesion" onclick="salirAplicacion()">Salir</div>
+				<!-- <button class="option-item" id="btnRegistrar">REGISTRAR</button> -->
+			</div>
+		</div>
+		<div class="main-content" id="displayContent">
+			<!-- <div class="modulo"> -->
+				<!-- <div class="title-modulo">CARGAR ACTIVIDADES</div>
+				<div class="title-modulo"></div>
+				<div class="content-modulo actividades-constantes">
+					
+					<div class="registrar-constantes">
+						<div class="item-form random-inp" >
+							<span name="optActividad" onclick="counterValues(this.id)" class="input-actividad editable" role="input" type="text" data-placeholder="Descripción de la actividad" id="inputActividad" contenteditable></span>
+						</div>
+						<div class="item-form">
+							<button class="btn-regular" onclick="guardarDescripcionActividad()" id="btInptDate">GUARDAR</button>
+						</div>
+						<div class="item-form">
+							<div class="mensaje-form" id="mensajeRespuestaForm"></div>
+						</div>
+
+					</div>
+					
+					<div class="mostrar-constantes">
+
+						<div class="lista-actividades">
+							<div class="title-mod">Actividades</div>
+							<div class="content" id="listaActividades">
+								<div class="item-act-random">
+									<div class="agarrate-act">
+										<input class="checker" type="checkbox" id="check1"><label for="check1"></label>
+									</div>
+									<div class="options-act-random">
+										<div class="option-act">
+											<span class="material-icons">edit</span>
+										</div>
+										<div class="option-act">
+											<span class="material-icons">delete_forever</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="lista-actividades">
+							<div class="title-mod">Fechas</div>
+							<div class="title-mod">
+								<input class="item-inp-minus" type="text" id="inpInicio"  value="01-08-2022" onchange="" placeholder="Seleccionar fecha" disabled>
+								<button class="btn-minus" onclick="crearCalendario('inpInicio')" id="btInptDate">INICIO</button>
+								<input class="item-inp-minus" type="text" id="inpFin"  value="19-08-2022" onchange="" placeholder="Seleccionar fecha" disabled>
+								<button class="btn-minus" onclick="crearCalendario('inpFin')" id="btInptDate">FIN</button>
+							</div>
+							<div class="title-mod">
+								<button class="btn-minus" onclick="leerFechasRandom()">GENERAR</button>
+							</div>
+							<div class="content">
+							</div>
+						</div>
+					</div>
+
+				</div> -->
+			<!-- </div> -->
+			
+		</div>
+	</div>
+
+	<script src="js/index.js"></script>
+</body>
+</html>

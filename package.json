@@ -1,0 +1,24 @@
+{
+  "name": "APP_BITACORA_TASKS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "initialize": "npm install && cd build && npm install",
+    "start": "cls && cd build && npm start",
+    "compile": "cd build && npm run compile",
+    "tasks": "cls && gulp"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-stylus": "^2.7.0",
+    "gulp-uglify": "^3.0.2"
+  },
+  "keywords": [],
+  "author": "Ángel Aguilar",
+  "license": "ISC"
+}

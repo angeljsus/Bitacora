@@ -1,0 +1,89 @@
+// @import 'nib'
+.calendar-container
+	font-family 'Open Sans', sans-serif
+	width 100%
+	height 100%
+	display flex
+	align-items center
+	justify-content center
+	position absolute
+	left 0
+	top 0
+	background rgba(0, 0, 0, .02)
+	user-select none
+	.calendar
+		width 300px
+		height 300px
+		display flex
+		flex-direction column
+		border 1px solid rgba(0, 0, 0, .1)
+		background white
+		.desc-row
+			flex 1
+			flex-direction space-around
+			font-weight bold	
+			.opt-despla
+				width 10%
+				height 100%
+				display flex
+				justify-content center
+				align-items center
+				font-size 1.4em	
+				// border 1px solid rgba(0, 0, 0, .1)
+				// border-radius 7px
+				&:hover
+					border 2px solid rgba(0, 0, 0, .1)
+			.description
+				height 100%
+				display flex
+				justify-content center
+				align-items center
+				flex 1
+		.days-row
+			height 7%
+			display flex
+			jutify-content center
+			font-size .8em
+			.day
+				display flex
+				flex 1
+				justify-content center
+				align-items center
+			.today
+				width 100%
+				display flex
+				justify-content flex-end
+				align-items center
+				font-weight bold
+				font-size .8em
+				background rgba(0,0,0,.03)
+		.row-calendar
+			width 100%
+			height 100%
+			flex 1
+			display flex
+			justify-content center
+			align-items center
+			// border 1px solid
+			.day
+				width calc(100%/7)
+				height 100%
+				display flex
+				justify-content center
+				align-items center
+				font-size .9em
+				// border 1px solid
+				&:hover
+					background #a8dadc
+			.day-selected
+				background #80ed99
+			.day-disabled
+				pointer-events none
+				background rgba(0, 0, 0, .1)
+			.day-marked
+				border 2px solid #d00000
+			.day-hidden
+				pointer-events none
+				&:hover
+					pointer-events none
+					
