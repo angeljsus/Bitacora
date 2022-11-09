@@ -50,7 +50,7 @@ function cargarModuloRegistro(){
 		const areaFechas = document.getElementById('areaFechas');
 		const areaOtrosRegistros = document.getElementById('areaOtrosRegistros');
 		areaOtrosRegistros.style = 'display: none'
-		areaFechas.style = 'display: flex'
+		areaFechas.style = 'display: flex';
 	})
 }
 

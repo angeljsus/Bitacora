@@ -1,71 +1,50 @@
-.actividades-constantes
+.random-module
 	width 100%
 	height 100%
-	// border 2px solid green
-.actividades-constantes
-	width 100%
-	height 100%
-	display flex
-	// flex-wrap wrap
-	flex-direction column
-	.registrar-constantes
+	border 2px solid
+	.header-module
+		height 60px
 		width 100%
-		height 90px
+		background #6c757d
+		color white
+	.container-module
+		height calc(100% - 60px)
 		display flex
 		flex-direction column
-		align-items center
-		// justify-content center
-		
-		// border 1px solid red
-		.mensaje-form
-			height 20px
-			font-size .8em
-			font-weight bold
-			color #fca311
-			// border 1px solid red
-		// .random-inp
-			// border 1px solid rgba(0,0,0,0.2)
-		.item-form
-			width 100%
-			height 70px
+		border 2px solid red
+		.calendar-area
+			height 40%
 			display flex
-			align-items center
-			justify-content center
-			// border 1px solid
-			.input-actividad
+			border 1px solid red
+			.preview-calendar
+				flex 2
+				border 1px solid
+			.options-calendar
 				flex 1
-				width 100%
-				padding 5px
-				font-size .8em
-				border 1px solid rgba(0,0,0,0.2)
-				&:empty:before
-					content attr(data-placeholder)
-					color gray
-	.mostrar-constantes
-		width 100%
-		height 100%
-		overflow auto
-		display flex
-		flex 1
-		// border 2px solid green
-		.lista-actividades
-			width 100%
-			height 100%
+				border 1px solid
+		.actividades-area
+			height 70% 
 			display flex
 			flex-direction column
-			// border 2px solid blue
-			.title-mod
-				height 35px
-				color white
-				background #6c757d
-				display flex
-				justify-content space-evenly
-				align-items center
-			.content
+			border 2px solid green
+			.formulario
 				width 100%
-				flex 1
+				height 60px
+				display flex
+				align-items center
+				border 1px solid
+				.input-actividad
+					flex 1
+					width 100%
+					min-height 35px 
+					padding 5px
+					font-size .8em
+					border 1px solid rgba(0,0,0,0.2)
+			.despliegue-actividades
+				width 100%
+				height calc(100% - 60px)
 				overflow auto
-				// border 2px solid blue
+				border 2px solid blue
 				.marked
 					background #48cae4
 				.item-act-random
@@ -79,37 +58,28 @@
 						border 1px solid gray
 					.agarrate-act
 						display flex
+						min-height 40px
 						flex 2
+						border 1px solid
 						align-items center
-						.idact
-							width 30px
+						.random-ref
+							width 80px
 							height 100%
 							display flex
 							align-items center
 							justify-content center
 							font-weight bold
-							// border 1px solid
-						input
-							width 5px
-							height 35px
-							padding 0
-							margin 0
-							opacity 0
-						label
-							font-size .8em
-							flex 1
-							display flex
-							height 100%
-							align-items center
+							border 1px solid
 					.options-act-random
+						width 70px
 						display flex
 						align-items center
+						justify-content space-around
+						border 1px solid red
 						.option-act
 							color #6c757d
-							// margin 2px
 							border none
 							&:hover
 								margin 0px
 								border 1px solid rgba(0,0,0,.2)
-								// border 2px solid
 								border-radius 13px

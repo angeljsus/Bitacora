@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 
 window.addEventListener('DOMContentLoaded', existeSesionIniciada);
 
+			// htmlRandomActividades()
 function existeSesionIniciada(){
 	// hacer consulta para ver si existe sesion iniciada
 	getTables()
@@ -22,7 +23,6 @@ function existeSesionIniciada(){
 				// closeModal()
 				if (response) {
 					cargarModuloRegistro()
-					
 					let KEY_RFC = localStorage.getItem('RFC_KEY');
 					// cargaRandomActividades(KEY_RFC)
 

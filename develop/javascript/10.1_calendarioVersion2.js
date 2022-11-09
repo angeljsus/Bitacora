@@ -148,6 +148,7 @@ const getCalendario  = (options, slideElement) => {
 			let fechaFinal = '', result = '', estado = false;
 			// const elements = document.getElementsByName('valuesModMarcado');
 			for(let i = 0; i < diaSeleccionado.length; i++) {
+				
 				diaSeleccionado[i].onclick = () =>{
 					estado = getValueToMarker();
 					if (estado) {
@@ -172,17 +173,40 @@ const getCalendario  = (options, slideElement) => {
 							})
 							result ? false : options.global.push(fechaFinal)
 						})
-					} else {
-						console.log('Es necesario seleccionar una opcion')
 					}
-				} 
+				}
+				// calendario de random
+				if(options.parentId === 'calendar3'){
+					diaSeleccionado[i].onclick = () =>{
+						fechaFinal = new Date( diaSeleccionado[i].getAttribute('dateDefault') );
+						fechaFinal = getJsonDate(fechaFinal);
+						// console.log('Querrrrooooo', fechaFinal)
+						if(options.sinceTo.length === 2){
+							options.sinceTo.shift();	
+							options.sinceTo.push(fechaFinal)
+							// marcarFechas(options.sinceTo)
+							// marcar las fechas que serán creadas las actividades
+							
+						} else {
+							options.sinceTo.push(fechaFinal)
+						}
+						if(options.sinceTo.length === 2){
+							marcarFechas(options.sinceTo)
+						}
+					}
+
+				}
 			}
 			let element = false;
-			console.log(options.global)
+			// console.log(options.global)
 			options.global.map( day => {
 				element = document.getElementById(day.id);
 				element ? element.style.backgroundColor = day.colorToGroup : false
 			})
+
+			if(options.parentId === 'calendar3' && options.sinceTo.length === 2){
+				marcarFechas(options.sinceTo)
+			}
 		}
 	})
 }
@@ -193,7 +217,7 @@ const getValueToMarker = () => {
 	let atributo = null;
 	let valor = null;
 	do{
-		atributo = elements[i].getAttribute('valor')
+		atributo = elements[i] ? elements[i].getAttribute('valor') : null
 		if(atributo !== 'null'){
 			valor = atributo;
 		}
@@ -319,7 +343,7 @@ const getDatesArray = (fechaInicio, fechaFin, disable) => {
 						});
 					}
 					// console.log(estado)
-					delete fechaFinal.id;
+					// delete fechaFinal.id;
 					estado ? fechaFinal.disabled = true : fechaFinal.disabled = false;
 					finalArray.push(fechaFinal)
 				}

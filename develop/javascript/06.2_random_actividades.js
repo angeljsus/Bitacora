@@ -13,7 +13,10 @@ function cargaRandomActividades(rfc){
 }
 
 
+let _arrayDates = [];
+
 function htmlRandomActividades(){
+	_arrayDates = [];
 	const KEY = localStorage.getItem('RFC_KEY');
 	const USER_APP = localStorage.getItem('USER_APP');
 	const areaOtrosRegistros = document.getElementById('areaOtrosRegistros');
@@ -29,101 +32,92 @@ function htmlRandomActividades(){
 	}
 
 	let html = `
-	<div class="title-similares">
-		<div class="row-title-similar">
-			<div class="item-similar" id="titleChange">
-				ACTIVIDADES RANDOM
-			</div>
-		</div>
-		<div class="row-title-similar">
-			<div class="item-similar" id="desplFechaOtros">
-				<div class="item-similar">
-					
-					<input 
-						class="item-inp-minus" 
-						type="text" 
-						id="inpInicio"  
-						onchange="" 
-						placeholder="Seleccionar fecha" 
-						disabled>
-					
-					<button 
-						class="btn-minus" 
-						onclick="crearCalendario('inpInicio')" 
-						id="btInptDateInicio">INICIO</button>
-
-					<input 
-						class="item-inp-minus" 
-						type="text" 
-						id="inpFin" 
-						onchange="" placeholder="Seleccionar fecha" 
-						disabled>
-						
-					<button 
-						class="btn-minus" 
-						onclick="crearCalendario('inpFin')" 
-						id="btInptDateFin">FIN</button>
-
-					<div class="item-similar">
-						<button class="btn-minus" 
-							onclick="leerFechasRandom()">
-							GENERAR
-						</button>
+		<div class="random-module">
+			<!--HEADER-->
+			<div class="header-module"></div>
+			<!--HEADER-->
+				<!--MODULO-->
+			<div class="container-module">
+				<div class="calendar-area">
+					<div class="preview-calendar" id="calendar3"></div>
+					<div class="options-calendar">
+						<button onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>
+						<div id="infoRandomSeleccion"></div>
 					</div>
-
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="content-similares" id="divOtrosDatos">
-		<div class="actividades-constantes">
-			<div class="registrar-constantes">
-				<div class="item-form random-inp" >
-					<span 
-						name="optActividad" 
-						onclick="counterValues(this.id)" 
-						class="input-actividad editable" 
-						role="input" type="text" 
-						data-placeholder="Descripción de la actividad" 
-						id="inputActividad" 
-						contenteditable>
-					</span>
-					<button class="btn-regular" onclick="guardarDescripcionActividad()" id="btGuardarRandom">GUARDAR</button>
-				</div>
-				<div class="mensaje-form" id="messageActRandom"></div>
-			</div>
+				<!--ACTIVIDADES-->
+				<div class="actividades-area">
+					<!--FORM-->
+					<div class="formulario">
+						<span 
+							name="optActividad" 
+							onclick="counterValues(this.id)" 
+							class="input-actividad editable" 
+							role="input" type="text" 
+							data-placeholder="Descripción de la actividad" 
+							id="inputActividad" 
+							contenteditable>
+						</span>
+						<button class="btn-regular" onclick="guardarDescripcionActividad()" id="btGuardarRandom">GUARDAR</button>
+					</div>
+					<!--FORM-->
 
-			<div class="mostrar-constantes">
-				<div class="lista-actividades">
-					<div class="title-mod">Actividades</div>
-					<div class="content" id="listaActividades">
-						<!--
+					<!--ACTS-->
+					<div class="despliegue-actividades">
 						<div class="item-act-random">
 							<div class="agarrate-act">
-								<input class="checker" type="checkbox" id="check1"><label for="check1"></label>
+								<div class="random-ref">100</div>
 							</div>
 							<div class="options-act-random">
 								<div class="option-act">
-									<span class="material-icons">edit</span>
+									<span class="material-icons" >edit</span>
 								</div>
 								<div class="option-act">
 									<span class="material-icons">delete_forever</span>
 								</div>
 							</div>
 						</div>
-						-->
-					</div>
-				</div>
 
+						<div class="item-act-random"><div class="agarrate-act"></div></div>
+
+					</div>
+					<!--ACTS-->
+
+				</div>
+				<!--ACTIVIDADES-->
 			</div>
+				<!--MODULO-->
 
 		</div>
-	</div>
 	`;
-
+	console.log(areaOtrosRegistros)
 	areaOtrosRegistros.innerHTML = html;
 	areaOtrosRegistros.style.display = 'flex';
 	areaFechas.style.display = 'none';
-	mostrarActividadesRegistradas({ rfc: KEY, user: USER_APP})
+	const specific = getDiasFestivos(); 
+	const data = 
+		{
+			mode: 1, // mode (0: modal o 1:child)
+			// si es child busca propiedad 'parent' con un id del elemento padre
+			parentId: 'calendar3',
+			format:'string',
+			disable: {
+				daysOfWeek:[0,6],
+				// eachMonth:[ { day:21, month:9}, { day:21, month:10} ],
+				specific: specific
+			},
+			sinceTo: _arrayDates
+			// global: globalArray
+		}
+			getDatesSegunStatus()
+		.then( array => { data.global = array; return data; } )
+		.then( object => { getCalendario(object); } )
 
+
+	// mostrarActividadesRegistradas({ rfc: KEY, user: USER_APP})
+
+}
+
+const leerArreglo = () => {
+	console.warn(_arrayDates)
 }

@@ -426,3 +426,73 @@ function actualizarRandomActividad(object){
 	})
 
 }
+
+
+// MODULO DE RAN
+const marcarFechas = array => {
+	// console.warn(array)
+	let start = 0;
+	let end = 0;
+
+	const uno = array[0].value.replace(/-/g,'');
+	const dos = array[1].value.replace(/-/g,'');
+	if(uno >= dos){
+		start = array[1];
+		end = array[0];
+	}
+	if(dos >= uno){
+		start = array[0];
+		end = array[1];
+	}
+	let element = null;
+	getDatesSegunStatus()
+	.then( array => {
+		array.map( day => {
+			element = document.getElementById(day.id);
+			element ? element.style.backgroundColor = day.colorToGroup : false
+		})
+		console.log('#1 ', array)
+	})
+	.then(() => {
+		console.log('#2 ', array)
+		start.diaObject = getStringDia(start.dayWeek);
+		end.diaObject = getStringDia(end.dayWeek);
+		const infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
+		const specific = getDiasFestivos(); 
+		const valores = getDatesArray(start.default, end.default,{ daysOfWeek:[0,6], specific: specific})
+		// console.log(valores)
+		valores.map( ({id, value, colorToGroup, full, disabled, month, year}) => {
+			if(month === 11 && year === 2022){
+				console.log('%s %s', colorToGroup, full)
+			}
+			if(disabled === false){
+				// id-18-11-2022
+				element = document.getElementById(id);
+				// if(colorToGroup){
+					element ? element.style.backgroundColor = '#01baef' : ''
+				// }
+				// else {
+					// element ? element.style.backgroundColor = 'white' : ''
+				// }
+			} 
+		})
+		console.log('[]',start)
+		infoRandomSeleccion.innerHTML = `<br>
+		<div>COMIENZO: ${start.diaObject.string} ${start.full}</div><br>
+		<div>FIN: ${end.diaObject.string} ${end.full}</div>
+		`;
+	})
+	// options.global.map( day => {
+	// 	element = document.getElementById(day.id);
+	// 	element ? element.style.backgroundColor = day.colorToGroup : false
+	// })
+
+
+	// console.log('start: ', start)
+	// console.log('end: ', end)
+	// array.map( date => {
+		// let key = date.value.replace(/-/g.'');
+
+		// console.log(date)
+	// })
+}
