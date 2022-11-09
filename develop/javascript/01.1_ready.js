@@ -7,7 +7,7 @@ function existeSesionIniciada(){
 	// hacer consulta para ver si existe sesion iniciada
 	getTables()
 		.then(function(response){
-			getDatesSegunStatus();
+			// getDatesSegunStatus();
 			// localStorage.setItem('USER_APP','');
 			let USER_APP = localStorage.getItem('USER_APP');
 			if (!USER_APP) {

@@ -364,21 +364,6 @@ div {
   border-radius: 15px;
   color: #c97c5d;
 }
-.similares-container .area-similares .content-similares .item-fecha .status-pendiente {
-  background: #ff002b;
-}
-.similares-container .area-similares .content-similares .item-fecha .status-registrado {
-  background: #80b918;
-}
-.similares-container .area-similares .content-similares .item-fecha .status-vacaciones {
-  background: #588b8b;
-}
-.similares-container .area-similares .content-similares .item-fecha .status-permiso {
-  background: #779be7;
-}
-.similares-container .area-similares .content-similares .item-fecha .status-oficina {
-  background: #ffd000;
-}
 .similares-container .area-similares .content-similares .item-fecha:hover {
   background: #48cae4;
   font-weight: bold;
@@ -833,7 +818,6 @@ div {
 }
 .content-disable .content-area .calendar-area {
   width: 400px;
-  border: 1px solid;
 }
 .content-disable .content-area .calendar-options {
   flex: 1;
@@ -873,13 +857,22 @@ div {
 }
 .content-disable .content-area .calendar-options .options-select .seleccionable {
   font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 5px;
+  color: #403d39;
+}
+.content-disable .content-area .calendar-options .options-select .seleccionable .mark {
+  margin: 0px 5px 0px 0px;
+  width: 25px;
+  height: 100%;
+  border-radius: 5px 0 0 5px;
 }
 .content-disable .info-area {
   width: 100%;
   flex: 1;
-  border: 1px solid #f00;
 }
 
 .modal-fecha {
@@ -1099,6 +1092,22 @@ div {
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
+}
+
+.status-pendiente {
+  background: #ff002b;
+}
+.status-registrado {
+  background: #80b918;
+}
+.status-vacaciones {
+  background: #588b8b;
+}
+.status-permiso {
+  background: #779be7;
+}
+.status-oficina {
+  background: #ffd000;
 }
 
 .btn-regular {

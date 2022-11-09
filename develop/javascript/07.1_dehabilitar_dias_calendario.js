@@ -1,5 +1,3 @@
-
-
 // el evento es escuchado desde cargaRandomActividades() 06.2_random_actividades.js
 const htmlDisableDaysCalendar = () => {
 
@@ -8,7 +6,7 @@ const htmlDisableDaysCalendar = () => {
 	const areaOtrosRegistros = document.getElementById('areaOtrosRegistros');
 	const areaFechas = document.getElementById('areaFechas');
 	const backDates = document.getElementById('backDates');
-	const globalArray = [];
+	// const globalArray = getDatesSegunStatus();
 	const specific = getDiasFestivos(); 
 	// console.log('spec 0 ',specific)
 	const data = 
@@ -22,7 +20,7 @@ const htmlDisableDaysCalendar = () => {
 				// eachMonth:[ { day:21, month:9}, { day:21, month:10} ],
 				specific: specific
 			},
-			global: globalArray
+			// global: globalArray
 		}
 
 	if (!backDates) {
@@ -40,6 +38,9 @@ const htmlDisableDaysCalendar = () => {
 				</div>
 			</div>
 			<div class="row-title-similar">
+				<div class="item-similar">
+					Marcar días según como se cumplió o se cumplirá la jornada laboral
+				</div>
 			</div>
 		</div>
 		<div class="content-disable">
@@ -48,10 +49,38 @@ const htmlDisableDaysCalendar = () => {
 				<div class="calendar-options">
 						<div class="options-select">
 							<div class="option">Marcar cómo:</div>
-							<div class="option seleccionable" valor="null" name="valuesModMarcado" onclick="marcarComo(this, 2)">Vacaciones</div>
-							<div class="option seleccionable" valor="null" name="valuesModMarcado" onclick="marcarComo(this, 1)">Permiso</div>
-							<div class="option seleccionable" valor="null" name="valuesModMarcado" onclick="marcarComo(this, 3)">Se laboró en oficinas</div>
-							<div class="option seleccionable" valor="null" name="valuesModMarcado" onclick="marcarComo(this, 10)">Limpiar</div>
+							<div 
+								class="option seleccionable" 
+								valor="null" 
+								name="valuesModMarcado" 
+								onclick="marcarComo(this, 2)">
+									<div class="mark status-vacaciones" ></div>
+									Vacaciones
+								</div>
+							<div 
+								class="option seleccionable" 
+								valor="null" 
+								name="valuesModMarcado" 
+								onclick="marcarComo(this, 1)">
+									<div class="mark status-permiso"></div>
+									Permiso
+								</div>
+							<div 
+								class="option seleccionable" 
+								valor="null" 
+								name="valuesModMarcado" 
+								onclick="marcarComo(this, 3)">
+									<div class="mark status-oficina"></div>
+									Se laboró en oficinas
+								</div>
+							<div 
+								class="option seleccionable" 
+								valor="null" 
+								name="valuesModMarcado" 
+								onclick="marcarComo(this, 10)">
+									<div class="mark"></div>
+									Limpiar
+								</div>
 						</div>
 				</div>	
 
@@ -61,7 +90,10 @@ const htmlDisableDaysCalendar = () => {
 	`;
 
 	areaOtrosRegistros.innerHTML = html;
-	getCalendario(data);
+	// const globalArray = 
+	getDatesSegunStatus()
+	.then( array => { data.global = array; return data; } )
+	.then( object => getCalendario(data) )
 	areaOtrosRegistros.style.display = 'flex';
 	areaFechas.style.display = 'none';
 }
@@ -160,12 +192,53 @@ const getDatesSegunStatus = () => {
 	const KEY = localStorage.getItem('RFC_KEY');
 	const USER_APP = localStorage.getItem('USER_APP');
 	const db = getDatabase();
-	return new Promise( (resolve, reject) => {
+	return new Promise( (queryResolve, reject) => {
 		db.transaction( tx => {
-			tx.executeSql('SELECT fecha FROM TBL_CAMPOS WHERE rfcusuario = ? AND claveusr = ?', [KEY, USER_APP], (tx, results) =>{
-				let resultado = Object.keys(results.rows).map(function (key) { return results.rows[key]; });
-				console.log(resultado)
+			tx.executeSql('SELECT fecha, capturado FROM TBL_CAMPOS WHERE rfcusuario = ? AND claveusr = ?', [KEY, USER_APP], (tx, results) => {
+				return new Promise( (resolve, reject) => {
+					const object = Object.keys(results.rows);
+					let counter = 1;
+					for (let i = 0, promise = Promise.resolve(); i < object.length; i++) {
+						promise = promise.then( () => {
+							let key = object[i];
+							let split = results.rows[key].fecha.split('-');
+							const dateObject = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
+							dateObject.colorToGroup = getColorStatus(results.rows[key].capturado);
+							object[i] = dateObject;
+						})
+						.then(() => counter++ )
+						.then(cnt => cnt === object.length ? resolve( object ) : '' )
+					}
+				})
+				.then( array => queryResolve(array) )
+				// let resultado = Object.keys(results.rows).map( key => { 
+				// 	let split = results.rows[key].fecha.split('-');
+				// 	const object = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
+				// 	object.colorToGroup = getColorStatus(results.rows[key].capturado);
+				// } );
+				// resolve(resultado) 
 			})
 		},err => reject(err) )
 	})
+}
+
+
+const getColorStatus = capturado => {
+	let color = '';
+	switch(capturado){
+		case 1:
+			color = '#779be7'
+		break;
+		case 2:
+			color = '#588b8b'
+		break;
+		case 3:
+			color = '#ffd000'
+		break;
+		case 10:
+			color = '#edf2f4'
+		break;
+	}
+
+	return color;
 }

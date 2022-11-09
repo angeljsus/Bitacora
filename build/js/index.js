@@ -8,8 +8,8 @@ window.addEventListener('DOMContentLoaded', existeSesionIniciada);
 function existeSesionIniciada() {
   // hacer consulta para ver si existe sesion iniciada
   getTables().then(function (response) {
-    getDatesSegunStatus(); // localStorage.setItem('USER_APP','');
-
+    // getDatesSegunStatus();
+    // localStorage.setItem('USER_APP','');
     var USER_APP = localStorage.getItem('USER_APP');
 
     if (!USER_APP) {
@@ -520,7 +520,8 @@ function obtenerDatosRegistro(date, userApp) {
 }
 
 function marcaFechaSeleccionada(fecha) {
-  var itemValueFecha = document.getElementsByName('itemValueFecha');
+  var itemValueFecha = document.getElementsByName('itemValueFecha'); // let divSetDate = document.getElementById('divSetDate');
+
   var fechaElement = '';
 
   if (itemValueFecha) {
@@ -529,6 +530,7 @@ function marcaFechaSeleccionada(fecha) {
       element.classList.remove('date-selected');
 
       if (fechaElement == fecha) {
+        // element.getBoundingClientRect();
         // console.log(element.firstChild)
         element.classList.add('date-selected');
       } // console.log(element)
@@ -3147,8 +3149,8 @@ var htmlDisableDaysCalendar = function htmlDisableDaysCalendar() {
   var USER_APP = localStorage.getItem('USER_APP');
   var areaOtrosRegistros = document.getElementById('areaOtrosRegistros');
   var areaFechas = document.getElementById('areaFechas');
-  var backDates = document.getElementById('backDates');
-  var globalArray = [];
+  var backDates = document.getElementById('backDates'); // const globalArray = getDatesSegunStatus();
+
   var specific = getDiasFestivos(); // console.log('spec 0 ',specific)
 
   var data = {
@@ -3161,17 +3163,23 @@ var htmlDisableDaysCalendar = function htmlDisableDaysCalendar() {
       daysOfWeek: [0, 6],
       // eachMonth:[ { day:21, month:9}, { day:21, month:10} ],
       specific: specific
-    },
-    global: globalArray
+    } // global: globalArray
+
   };
 
   if (!backDates) {
     optionsBarFloar.insertAdjacentHTML('afterbegin', "\n\t\t\t<button id=\"backDates\" class=\"btn-otros\" onclick=\"regresaFechasActual()\">\n\t\t\t\t<span class=\"material-icons\">low_priority</span>\n\t\t\t</button>");
   }
 
-  var html = "\n\t\t<div class=\"title-similares\">\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tDESHABILITAR D\xCDAS\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"content-disable\">\n\t\t\t<div class=\"content-area\">\n\t\t\t\t<div class=\"calendar-area\" id=\"parentCalendar\"></div>\t\n\t\t\t\t<div class=\"calendar-options\">\n\t\t\t\t\t\t<div class=\"options-select\">\n\t\t\t\t\t\t\t<div class=\"option\">Marcar c\xF3mo:</div>\n\t\t\t\t\t\t\t<div class=\"option seleccionable\" valor=\"null\" name=\"valuesModMarcado\" onclick=\"marcarComo(this, 2)\">Vacaciones</div>\n\t\t\t\t\t\t\t<div class=\"option seleccionable\" valor=\"null\" name=\"valuesModMarcado\" onclick=\"marcarComo(this, 1)\">Permiso</div>\n\t\t\t\t\t\t\t<div class=\"option seleccionable\" valor=\"null\" name=\"valuesModMarcado\" onclick=\"marcarComo(this, 3)\">Se labor\xF3 en oficinas</div>\n\t\t\t\t\t\t\t<div class=\"option seleccionable\" valor=\"null\" name=\"valuesModMarcado\" onclick=\"marcarComo(this, 10)\">Limpiar</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\n\t\t\t</div>\n\t\t\t<div class=\"info-area\"></div>\n\t\t</div>\n\t";
-  areaOtrosRegistros.innerHTML = html;
-  getCalendario(data);
+  var html = "\n\t\t<div class=\"title-similares\">\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tDESHABILITAR D\xCDAS\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tMarcar d\xEDas seg\xFAn como se cumpli\xF3 o se cumplir\xE1 la jornada laboral\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"content-disable\">\n\t\t\t<div class=\"content-area\">\n\t\t\t\t<div class=\"calendar-area\" id=\"parentCalendar\"></div>\t\n\t\t\t\t<div class=\"calendar-options\">\n\t\t\t\t\t\t<div class=\"options-select\">\n\t\t\t\t\t\t\t<div class=\"option\">Marcar c\xF3mo:</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 2)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-vacaciones\" ></div>\n\t\t\t\t\t\t\t\t\tVacaciones\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 1)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-permiso\"></div>\n\t\t\t\t\t\t\t\t\tPermiso\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 3)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-oficina\"></div>\n\t\t\t\t\t\t\t\t\tSe labor\xF3 en oficinas\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 10)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark\"></div>\n\t\t\t\t\t\t\t\t\tLimpiar\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\n\t\t\t</div>\n\t\t\t<div class=\"info-area\"></div>\n\t\t</div>\n\t";
+  areaOtrosRegistros.innerHTML = html; // const globalArray = 
+
+  getDatesSegunStatus().then(function (array) {
+    data.global = array;
+    return data;
+  }).then(function (object) {
+    return getCalendario(data);
+  });
   areaOtrosRegistros.style.display = 'flex';
   areaFechas.style.display = 'none';
 };
@@ -3278,18 +3286,68 @@ var getDatesSegunStatus = function getDatesSegunStatus() {
   var KEY = localStorage.getItem('RFC_KEY');
   var USER_APP = localStorage.getItem('USER_APP');
   var db = getDatabase();
-  return new Promise(function (resolve, reject) {
+  return new Promise(function (queryResolve, reject) {
     db.transaction(function (tx) {
-      tx.executeSql('SELECT fecha FROM TBL_CAMPOS WHERE rfcusuario = ? AND claveusr = ?', [KEY, USER_APP], function (tx, results) {
-        var resultado = Object.keys(results.rows).map(function (key) {
-          return results.rows[key];
-        });
-        console.log(resultado);
+      tx.executeSql('SELECT fecha, capturado FROM TBL_CAMPOS WHERE rfcusuario = ? AND claveusr = ?', [KEY, USER_APP], function (tx, results) {
+        return new Promise(function (resolve, reject) {
+          var object = Object.keys(results.rows);
+          var counter = 1;
+
+          var _loop = function _loop(i, _promise) {
+            _promise = _promise.then(function () {
+              var key = object[i];
+              var split = results.rows[key].fecha.split('-');
+              var dateObject = getJsonDate(new Date(split[2], split[1] - 1, split[0]));
+              dateObject.colorToGroup = getColorStatus(results.rows[key].capturado);
+              object[i] = dateObject;
+            }).then(function () {
+              return counter++;
+            }).then(function (cnt) {
+              return cnt === object.length ? resolve(object) : '';
+            });
+            promise = _promise;
+          };
+
+          for (var i = 0, promise = Promise.resolve(); i < object.length; i++) {
+            _loop(i, promise);
+          }
+        }).then(function (array) {
+          return queryResolve(array);
+        }); // let resultado = Object.keys(results.rows).map( key => { 
+        // 	let split = results.rows[key].fecha.split('-');
+        // 	const object = getJsonDate( new Date(split[2], split[1]-1, split[0]) ) 
+        // 	object.colorToGroup = getColorStatus(results.rows[key].capturado);
+        // } );
+        // resolve(resultado) 
       });
     }, function (err) {
       return reject(err);
     });
   });
+};
+
+var getColorStatus = function getColorStatus(capturado) {
+  var color = '';
+
+  switch (capturado) {
+    case 1:
+      color = '#779be7';
+      break;
+
+    case 2:
+      color = '#588b8b';
+      break;
+
+    case 3:
+      color = '#ffd000';
+      break;
+
+    case 10:
+      color = '#edf2f4';
+      break;
+  }
+
+  return color;
 };
 "use strict";
 

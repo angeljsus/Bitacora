@@ -424,12 +424,14 @@ function obtenerDatosRegistro(date, userApp){
 
 function marcaFechaSeleccionada(fecha){
 	let itemValueFecha = document.getElementsByName('itemValueFecha');
+	// let divSetDate = document.getElementById('divSetDate');
 	let fechaElement = '';
 	if (itemValueFecha) {
 		itemValueFecha.forEach(function(element){
 			fechaElement = element.id.replace(/cambiar/,'');
 			element.classList.remove('date-selected')
 			if (fechaElement == fecha) {
+				// element.getBoundingClientRect();
 				// console.log(element.firstChild)
 				element.classList.add('date-selected')
 			}
