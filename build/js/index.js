@@ -1040,7 +1040,7 @@ function almacenarRegistro() {
           break;
       }
 
-      itemFechaReg.style = "background: ".concat(color, ";");
+      itemFechaReg ? itemFechaReg.style = "background: ".concat(color, ";") : '';
       console.log("SELECT capturado, count(fecha) FROM TBL_CAMPOS WHERE rfcusuario = '".concat(inpRfcUser.value, "' AND claveusr = '").concat(USER_APP, "' GROUP BY  capturado"));
       db.transaction(function (tx) {
         tx.executeSql("\n\t\t\t\t\tSELECT\n\t\t\t\t\t\tinicio_homeoff\n\t\t\t\t\tFROM\n\t\t\t\t\t\tTBL_USUARIO\n\t\t\t\t\tWHERE\n\t\t\t\t\t\trfc_usuario = ?\n\t\t\t\t\tAND\n\t\t\t\t\t\tclaveusr = ?\n\t\t\t\t\t", [inpRfcUser.value, USER_APP], function (tx, results) {
@@ -2793,7 +2793,7 @@ function mostrarActividadesRegistradas(object) {
     var length = object.length;
 
     for (var i = 0; i < length; i++) {
-      elemento += "\n\t\t\t\t<div class=\"item-act-random\" id=\"fatherRandom-".concat(object[i].id_actividad, "\">\n\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t\tname=\"checkerList\" \n\t\t\t\t\t\t\tclass=\"checker\" \n\t\t\t\t\t\t\ttype=\"checkbox\" \n\t\t\t\t\t\t\tid=\"random-").concat(object[i].id_actividad, "\">\n\t\t\t\t\t\t\t<label \n\t\t\t\t\t\t\t\tid=\"label-random-").concat(object[i].id_actividad, "\"\n\t\t\t\t\t\t\t\tonclick=\"marcarActividadRandom('random-").concat(object[i].id_actividad, "', 'fatherRandom-").concat(object[i].id_actividad, "')\" \n\t\t\t\t\t\t\t\tfor=\"random-").concat(object[i].id_actividad, "\">").concat(object[i].descripcion_actividad, "</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"crearAreaEditarRandomActividad('").concat(convertToStringParams(object[i]), "')\">edit</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"deleteRandomActividad('fatherRandom-").concat(object[i].id_actividad, "','").concat(convertToStringParams(object[i]), "')\">delete_forever</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t");
+      elemento += "\n\t\t\t\t<div class=\"item-act-random\" id=\"fatherRandom-".concat(object[i].id_actividad, "\">\n\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t\tname=\"checkerList\" \n\t\t\t\t\t\t\tclass=\"checker\" \n\t\t\t\t\t\t\ttype=\"checkbox\" \n\t\t\t\t\t\t\tid=\"random-").concat(object[i].id_actividad, "\">\n\t\t\t\t\t\t\t<div class=\"idact\" >").concat(object[i].id_actividad, "</div>\n\t\t\t\t\t\t\t<label \n\t\t\t\t\t\t\t\tid=\"label-random-").concat(object[i].id_actividad, "\"\n\t\t\t\t\t\t\t\tonclick=\"marcarActividadRandom('random-").concat(object[i].id_actividad, "', 'fatherRandom-").concat(object[i].id_actividad, "')\" \n\t\t\t\t\t\t\t\tfor=\"random-").concat(object[i].id_actividad, "\">\n\t\t\t\t\t\t\t\t\t").concat(object[i].descripcion_actividad, "\n\t\t\t\t\t\t\t</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"crearAreaEditarRandomActividad('").concat(convertToStringParams(object[i]), "')\">edit</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"deleteRandomActividad('fatherRandom-").concat(object[i].id_actividad, "','").concat(convertToStringParams(object[i]), "')\">delete_forever</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t");
     }
 
     return listaActividades.insertAdjacentHTML('beforeend', elemento);
@@ -3189,25 +3189,20 @@ var htmlDisableDaysCalendar = function htmlDisableDaysCalendar() {
 };
 
 var marcarComo = function marcarComo(e, value) {
-  var color = '';
-
-  switch (value) {
-    case 1:
-      color = '#779be7';
-      break;
-
-    case 2:
-      color = '#588b8b';
-      break;
-
-    case 3:
-      color = '#ffd000';
-      break;
-
-    case 10:
-      color = '#edf2f4';
-      break;
-  }
+  var color = getColorStatus(value); // switch(value){
+  // 	case 1:
+  // 		color = '#779be7'
+  // 	break;
+  // 	case 2:
+  // 		color = '#588b8b'
+  // 	break;
+  // 	case 3:
+  // 		color = '#ffd000'
+  // 	break;
+  // 	// case 10:
+  // 	// 	color = '#ff002b'
+  // 	// break;
+  // }
 
   var elements = document.getElementsByName('valuesModMarcado');
   var i = 0;
@@ -3334,6 +3329,10 @@ var getColorStatus = function getColorStatus(capturado) {
   var color = '';
 
   switch (capturado) {
+    case 0:
+      color = '#80b918';
+      break;
+
     case 1:
       color = '#779be7';
       break;
@@ -3345,9 +3344,10 @@ var getColorStatus = function getColorStatus(capturado) {
     case 3:
       color = '#ffd000';
       break;
+    // caso especifico marcado de días eliminar
 
     case 10:
-      color = '#edf2f4';
+      color = '#adb5bd';
       break;
   }
 
@@ -4422,10 +4422,11 @@ var getJsonDate = function getJsonDate(objectDate) {
   object.diag = "".concat(day, "/").concat(month, "/").concat(object.year);
   object.diagReverse = "".concat(object.year, "/").concat(month, "/").concat(day);
   object["default"] = objectDate;
-  object.id = "id-".concat(object.dayMonth, "-").concat(object.month, "-").concat(object.year);
-  object.dia = getStringDia(object.dayWeek);
+  object.id = "id-".concat(object.dayMonth, "-").concat(object.month, "-").concat(object.year); // object.dia = getStringDia(object.dayWeek)
+
   return object;
-};
+}; // Falta implementar
+
 
 var getStringDia = function getStringDia(dayWeek) {
   var dias = [{

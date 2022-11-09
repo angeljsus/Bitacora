@@ -153,7 +153,7 @@ function almacenarRegistro(){
 					color = '#ffd000'
 					break;
 			}
-			itemFechaReg.style = `background: ${color};`;
+			itemFechaReg ? itemFechaReg.style = `background: ${color};` : '';
 			console.log(`SELECT capturado, count(fecha) FROM TBL_CAMPOS WHERE rfcusuario = '${inpRfcUser.value}' AND claveusr = '${USER_APP}' GROUP BY  capturado`)
 			db.transaction( function(tx){
 				tx.executeSql(`

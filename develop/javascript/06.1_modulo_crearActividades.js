@@ -90,10 +90,13 @@ function mostrarActividadesRegistradas(object){
 							class="checker" 
 							type="checkbox" 
 							id="random-${object[i].id_actividad}">
+							<div class="idact" >${object[i].id_actividad}</div>
 							<label 
 								id="label-random-${object[i].id_actividad}"
 								onclick="marcarActividadRandom('random-${object[i].id_actividad}', 'fatherRandom-${object[i].id_actividad}')" 
-								for="random-${object[i].id_actividad}">${object[i].descripcion_actividad}</label>
+								for="random-${object[i].id_actividad}">
+									${object[i].descripcion_actividad}
+							</label>
 					</div>
 					<div class="options-act-random">
 						<div class="option-act">

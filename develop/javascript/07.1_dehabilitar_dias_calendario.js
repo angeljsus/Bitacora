@@ -100,21 +100,22 @@ const htmlDisableDaysCalendar = () => {
 }
 
 const marcarComo = (e, value) => {
-	let color = '';
-	switch(value){
-		case 1:
-			color = '#779be7'
-		break;
-		case 2:
-			color = '#588b8b'
-		break;
-		case 3:
-			color = '#ffd000'
-		break;
-		case 10:
-			color = '#edf2f4'
-		break;
-	}
+
+	let color = getColorStatus(value);
+	// switch(value){
+	// 	case 1:
+	// 		color = '#779be7'
+	// 	break;
+	// 	case 2:
+	// 		color = '#588b8b'
+	// 	break;
+	// 	case 3:
+	// 		color = '#ffd000'
+	// 	break;
+	// 	// case 10:
+	// 	// 	color = '#ff002b'
+	// 	// break;
+	// }
 
 	const elements = document.getElementsByName('valuesModMarcado');
 	let i = 0;
@@ -225,6 +226,9 @@ const getDatesSegunStatus = () => {
 const getColorStatus = capturado => {
 	let color = '';
 	switch(capturado){
+		case 0:
+			color = '#80b918'
+		break;
 		case 1:
 			color = '#779be7'
 		break;
@@ -234,8 +238,9 @@ const getColorStatus = capturado => {
 		case 3:
 			color = '#ffd000'
 		break;
+		// caso especifico marcado de días eliminar
 		case 10:
-			color = '#edf2f4'
+			color = '#adb5bd'
 		break;
 	}
 
