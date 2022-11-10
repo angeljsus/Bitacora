@@ -2710,8 +2710,8 @@ function cargarModuloActividades() {
 }
 
 function guardarDescripcionActividad() {
-  var inputActividad = document.getElementById('inputActividad');
-  var messageActRandom = document.getElementById('messageActRandom');
+  var inputActividad = document.getElementById('inputActividad'); // const messageActRandom = document.getElementById('messageActRandom');
+
   var db = getDatabase();
   var KEY = localStorage.getItem('RFC_KEY');
   var USER_APP = localStorage.getItem('USER_APP');
@@ -2725,8 +2725,8 @@ function guardarDescripcionActividad() {
       }, function (err) {
         console.error(err);
       }, function () {
-        inputActividad.textContent = '';
-        messageActRandom.innerHTML = '';
+        inputActividad.textContent = ''; // messageActRandom.innerHTML = '';
+
         return mostrarActividadesRegistradas({
           descripcion_actividad: valorActividad,
           id_actividad: key + 1,
@@ -2735,8 +2735,7 @@ function guardarDescripcionActividad() {
         });
       });
     });
-  } else {
-    messageActRandom.innerHTML = 'No contiene descripción su actividad';
+  } else {// messageActRandom.innerHTML = 'No contiene descripción su actividad';
   }
 }
 
@@ -2748,7 +2747,7 @@ function getMaxIdActividad(rfc, clave) {
         var number = results.rows[0].number;
 
         if (results.rows[0].number === null) {
-          number = 1;
+          number = 0;
         }
 
         resolve(number);
@@ -2790,15 +2789,31 @@ function mostrarActividadesRegistradas(object) {
       });
     });
   }).then(function (object) {
+    console.warn(object);
     var length = object.length;
 
     for (var i = 0; i < length; i++) {
-      elemento += "\n\t\t\t\t<div class=\"item-act-random\" id=\"fatherRandom-".concat(object[i].id_actividad, "\">\n\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t<input\n\t\t\t\t\t\t\tname=\"checkerList\" \n\t\t\t\t\t\t\tclass=\"checker\" \n\t\t\t\t\t\t\ttype=\"checkbox\" \n\t\t\t\t\t\t\tid=\"random-").concat(object[i].id_actividad, "\">\n\t\t\t\t\t\t\t<div class=\"idact\" >").concat(object[i].id_actividad, "</div>\n\t\t\t\t\t\t\t<label \n\t\t\t\t\t\t\t\tid=\"label-random-").concat(object[i].id_actividad, "\"\n\t\t\t\t\t\t\t\tonclick=\"marcarActividadRandom('random-").concat(object[i].id_actividad, "', 'fatherRandom-").concat(object[i].id_actividad, "')\" \n\t\t\t\t\t\t\t\tfor=\"random-").concat(object[i].id_actividad, "\">\n\t\t\t\t\t\t\t\t\t").concat(object[i].descripcion_actividad, "\n\t\t\t\t\t\t\t</label>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"crearAreaEditarRandomActividad('").concat(convertToStringParams(object[i]), "')\">edit</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"deleteRandomActividad('fatherRandom-").concat(object[i].id_actividad, "','").concat(convertToStringParams(object[i]), "')\">delete_forever</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t");
+      elemento += "\n\t\t\t\t<div class=\"item-act-random\" id=\"fatherRandom-".concat(object[i].id_actividad, "\">\n\t\t\t\t\t<div class=\"agarrate-act\" onclick=\"marcarRandom(this)\" idActividad=\"").concat(object[i].id_actividad, "\">\n\t\t\t\t\t\t<div class=\"random-ref\">").concat(object[i].id_actividad, "</div>\n\t\t\t\t\t\t<div class=\"description-ref\" id=\"randomId-").concat(object[i].id_actividad, "\">").concat(object[i].descripcion_actividad, "</div>\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"crearAreaEditarRandomActividad('").concat(convertToStringParams(object[i]), "')\">edit</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t<span class=\"material-icons\" onclick=\"deleteRandomActividad('fatherRandom-").concat(object[i].id_actividad, "','").concat(convertToStringParams(object[i]), "')\">delete_forever</span>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t");
     }
 
     return listaActividades.insertAdjacentHTML('beforeend', elemento);
   });
 }
+
+var marcarRandom = function marcarRandom(e) {
+  var className = 'random-marked';
+  var stringId = 'fatherRandom-' + e.getAttribute('idActividad');
+  var parentElement = document.getElementById(stringId);
+  var clases = parentElement.classList.toString().search(className);
+
+  if (clases >= 0) {
+    parentElement.classList.remove(className);
+    e.removeAttribute('estadoRandom', 'selected');
+  } else {
+    parentElement.classList.add(className);
+    e.setAttribute('estadoRandom', 'selected');
+  }
+};
 
 function convertToStringParams(object) {
   var params = JSON.stringify(object);
@@ -3011,20 +3026,18 @@ function crearObjectFecha(cadena) {
   } else {
     return null;
   }
-}
+} // function marcarActividadRandom(cadenaId, row){
+// 	let status = document.getElementById(cadenaId);
+// 	let padre = document.getElementById(row);
+// 	console.log(status)
+// 	console.log(row)
+// 	if (!status.checked) {
+// 		padre.classList.add('marked');
+// 	} else {
+// 		padre.classList.remove('marked');
+// 	}
+// }
 
-function marcarActividadRandom(cadenaId, row) {
-  var status = document.getElementById(cadenaId);
-  var padre = document.getElementById(row);
-  console.log(status);
-  console.log(row);
-
-  if (!status.checked) {
-    padre.classList.add('marked');
-  } else {
-    padre.classList.remove('marked');
-  }
-}
 
 function deleteRegistrosPrevios(object, rfc, user) {
   var db = getDatabase();
@@ -3089,16 +3102,15 @@ function crearAreaEditarRandomActividad(objectString) {
 function actualizarRandomActividad(object) {
   // let object = JSON.parse(objectString.replace(/'/g,'"'));
   var db = getDatabase();
-  var inputActividad = document.getElementById('inputActividad');
-  var messageActRandom = document.getElementById('messageActRandom');
+  var inputActividad = document.getElementById('inputActividad'); // const messageActRandom = document.getElementById('messageActRandom');
+
   var btGuardarRandom = document.getElementById('btGuardarRandom');
   var value = inputActividad.textContent;
   return new Promise(function (resolve, reject) {
     if (value !== '') {
       resolve();
-    }
+    } // messageActRandom.innerHTML = 'La actividad no puede estar vacia'		
 
-    messageActRandom.innerHTML = 'La actividad no puede estar vacia';
   }).then(function () {
     return new Promise(function (resolve, reject) {
       db.transaction(function (tx) {
@@ -3110,10 +3122,12 @@ function actualizarRandomActividad(object) {
       });
     });
   }).then(function () {
-    messageActRandom.innerHTML = '¡Registro actualizado!';
+    // messageActRandom.innerHTML = '¡Registro actualizado!'		
     inputActividad.innerHTML = '';
     btGuardarRandom.setAttribute('onclick', "guardarDescripcionActividad()");
-    document.getElementById('label-random-' + object.id_actividad).innerHTML = value;
+    btGuardarRandom.innerHTML = 'GUARDAR';
+    var element = document.getElementById('randomId-' + object.id_actividad);
+    element ? element.innerHTML = value : '';
   });
 } // MODULO DE RAN
 
@@ -3122,28 +3136,44 @@ var marcarFechas = function marcarFechas(array) {
   // console.warn(array)
   var start = 0;
   var end = 0;
-  var uno = array[0].value.replace(/-/g, '');
-  var dos = array[1].value.replace(/-/g, '');
+  var dias = document.getElementsByClassName('day');
+  var searchR = -1;
 
-  if (uno >= dos) {
-    start = array[1];
-    end = array[0];
-  }
+  for (var i = 0; i < dias.length; i++) {
+    if (dias[i].hasAttribute('id')) {
+      searchR = dias[i].classList.toString().search(/random-class/g);
 
-  if (dos >= uno) {
-    start = array[0];
-    end = array[1];
+      if (searchR >= 0) {
+        dias[i].classList.remove('random-class');
+        dias[i].style.backgroundColor = 'white';
+      }
+    }
   }
 
   var element = null;
   getDatesSegunStatus().then(function (array) {
     array.map(function (day) {
-      element = document.getElementById(day.id);
+      element = document.getElementById(day.id); // devuelve color anteriormente marcado
+
       element ? element.style.backgroundColor = day.colorToGroup : false;
     });
     console.log('#1 ', array);
+    return;
   }).then(function () {
-    console.log('#2 ', array);
+    var uno = array[0]["default"];
+    var dos = array[1]["default"];
+
+    if (uno >= dos) {
+      start = array[1];
+      end = array[0];
+    }
+
+    if (dos >= uno) {
+      start = array[0];
+      end = array[1];
+    } // console.log('#2 ', array)
+
+
     start.diaObject = getStringDia(start.dayWeek);
     end.diaObject = getStringDia(end.dayWeek);
     var infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
@@ -3151,8 +3181,8 @@ var marcarFechas = function marcarFechas(array) {
     var valores = getDatesArray(start["default"], end["default"], {
       daysOfWeek: [0, 6],
       specific: specific
-    }); // console.log(valores)
-
+    });
+    console.log('#2', valores);
     valores.map(function (_ref) {
       var id = _ref.id,
           value = _ref.value,
@@ -3168,25 +3198,19 @@ var marcarFechas = function marcarFechas(array) {
 
       if (disabled === false) {
         // id-18-11-2022
-        element = document.getElementById(id); // if(colorToGroup){
+        element = document.getElementById(id);
 
-        element ? element.style.backgroundColor = '#01baef' : ''; // }
-        // else {
-        // element ? element.style.backgroundColor = 'white' : ''
-        // }
+        if (element) {
+          element.classList.add('random-class');
+          element.style.backgroundColor = '#bb9457'; // element.style.color = 'white';
+        } // console.log(colorToGroup)
+
       }
     });
-    console.log('[]', start);
-    infoRandomSeleccion.innerHTML = "<br>\n\t\t<div>COMIENZO: ".concat(start.diaObject.string, " ").concat(start.full, "</div><br>\n\t\t<div>FIN: ").concat(end.diaObject.string, " ").concat(end.full, "</div>\n\t\t");
+    infoRandomSeleccion.innerHTML = "<br>\n\t\t<div class=\"item-fecha-s\">\n\t\t\t<div class=\"tle\">INICIO:</div><div class=\"vle\">".concat(start.diaObject.string, " ").concat(start.full, "</div>\n\t\t</div>\n\t\t<div class=\"item-fecha-s\">\n\t\t\t<div class=\"tle\">FIN:</div><div class=\"vle\">").concat(end.diaObject.string, " ").concat(end.full, "</div>\n\t\t</div>\n\t\t");
   }); // options.global.map( day => {
   // 	element = document.getElementById(day.id);
   // 	element ? element.style.backgroundColor = day.colorToGroup : false
-  // })
-  // console.log('start: ', start)
-  // console.log('end: ', end)
-  // array.map( date => {
-  // let key = date.value.replace(/-/g.'');
-  // console.log(date)
   // })
 };
 "use strict";
@@ -3211,7 +3235,7 @@ function htmlRandomActividades() {
     optionsBarFloar.insertAdjacentHTML('afterbegin', "\n\t\t\t<button id=\"backDates\" class=\"btn-otros\" onclick=\"regresaFechasActual()\">\n\t\t\t\t<span class=\"material-icons\">low_priority</span>\n\t\t\t</button>");
   }
 
-  var html = "\n\t\t<div class=\"random-module\">\n\t\t\t<!--HEADER-->\n\t\t\t<div class=\"header-module\"></div>\n\t\t\t<!--HEADER-->\n\t\t\t\t<!--MODULO-->\n\t\t\t<div class=\"container-module\">\n\t\t\t\t<div class=\"calendar-area\">\n\t\t\t\t\t<div class=\"preview-calendar\" id=\"calendar3\"></div>\n\t\t\t\t\t<div class=\"options-calendar\">\n\t\t\t\t\t\t<button onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">getArray</button>\n\t\t\t\t\t\t<div id=\"infoRandomSeleccion\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t\t<div class=\"actividades-area\">\n\t\t\t\t\t<!--FORM-->\n\t\t\t\t\t<div class=\"formulario\">\n\t\t\t\t\t\t<span \n\t\t\t\t\t\t\tname=\"optActividad\" \n\t\t\t\t\t\t\tonclick=\"counterValues(this.id)\" \n\t\t\t\t\t\t\tclass=\"input-actividad editable\" \n\t\t\t\t\t\t\trole=\"input\" type=\"text\" \n\t\t\t\t\t\t\tdata-placeholder=\"Descripci\xF3n de la actividad\" \n\t\t\t\t\t\t\tid=\"inputActividad\" \n\t\t\t\t\t\t\tcontenteditable>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<button class=\"btn-regular\" onclick=\"guardarDescripcionActividad()\" id=\"btGuardarRandom\">GUARDAR</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--FORM-->\n\n\t\t\t\t\t<!--ACTS-->\n\t\t\t\t\t<div class=\"despliegue-actividades\">\n\t\t\t\t\t\t<div class=\"item-act-random\">\n\t\t\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t\t\t<div class=\"random-ref\">100</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\" >edit</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\">delete_forever</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"item-act-random\"><div class=\"agarrate-act\"></div></div>\n\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--ACTS-->\n\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t</div>\n\t\t\t\t<!--MODULO-->\n\n\t\t</div>\n\t");
+  var html = "\n\t\t<div class=\"random-module\">\n\t\t\t<!--HEADER-->\n\t\t\t<div class=\"header-module\"></div>\n\t\t\t<!--HEADER-->\n\t\t\t\t<!--MODULO-->\n\t\t\t<div class=\"container-module\">\n\t\t\t\t<div class=\"calendar-area\">\n\t\t\t\t\t<div class=\"preview-calendar\" id=\"calendar3\"></div>\n\t\t\t\t\t<div class=\"options-calendar\">\n\t\t\t\t\t\t<div class=\"info-group\" id=\"infoRandomSeleccion\"></div>\n\t\t\t\t\t\t<div class=\"buttons-container\">\n\t\t\t\t\t\t\t<button onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">getArray</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t\t<div class=\"actividades-area\">\n\t\t\t\t\t<!--FORM-->\n\t\t\t\t\t<div class=\"formulario\">\n\t\t\t\t\t\t<span \n\t\t\t\t\t\t\tname=\"optActividad\" \n\t\t\t\t\t\t\tonclick=\"counterValues(this.id)\" \n\t\t\t\t\t\t\tclass=\"input-actividad editable\" \n\t\t\t\t\t\t\trole=\"input\" type=\"text\" \n\t\t\t\t\t\t\tdata-placeholder=\"Descripci\xF3n de la actividad\" \n\t\t\t\t\t\t\tid=\"inputActividad\" \n\t\t\t\t\t\t\tcontenteditable>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<button class=\"btn-regular\" onclick=\"guardarDescripcionActividad()\" id=\"btGuardarRandom\">GUARDAR</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--FORM-->\n\n\t\t\t\t\t<!--ACTS-->\n\t\t\t\t\t<div class=\"despliegue-actividades\" id=\"listaActividades\">\n\t\t\t\t\t\t<!--<div class=\"item-act-random\">\n\t\t\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t\t\t<div class=\"random-ref\">100</div>\n\t\t\t\t\t\t\t\t<div class=\"description-ref\">\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\" >edit</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\">delete_forever</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>-->\n\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--ACTS-->\n\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t</div>\n\t\t\t\t<!--MODULO-->\n\n\t\t</div>\n\t");
   console.log(areaOtrosRegistros);
   areaOtrosRegistros.innerHTML = html;
   areaOtrosRegistros.style.display = 'flex';
@@ -3236,7 +3260,11 @@ function htmlRandomActividades() {
     return data;
   }).then(function (object) {
     getCalendario(object);
-  }); // mostrarActividadesRegistradas({ rfc: KEY, user: USER_APP})
+  });
+  mostrarActividadesRegistradas({
+    rfc: KEY,
+    user: USER_APP
+  });
 }
 
 var leerArreglo = function leerArreglo() {
@@ -4269,12 +4297,15 @@ var getCalendario = function getCalendario(options, slideElement) {
           if (options.parentId === 'calendar3') {
             diaSeleccionado[_i2].onclick = function () {
               fechaFinal = new Date(diaSeleccionado[_i2].getAttribute('dateDefault'));
-              fechaFinal = getJsonDate(fechaFinal); // console.log('Querrrrooooo', fechaFinal)
+              fechaFinal = getJsonDate(fechaFinal);
+
+              diaSeleccionado[_i2].classList.add('random-class');
+
+              diaSeleccionado[_i2].style.backgroundColor = '#bb9457';
 
               if (options.sinceTo.length === 2) {
                 options.sinceTo.shift();
-                options.sinceTo.push(fechaFinal); // marcarFechas(options.sinceTo)
-                // marcar las fechas que serán creadas las actividades
+                options.sinceTo.push(fechaFinal);
               } else {
                 options.sinceTo.push(fechaFinal);
               }

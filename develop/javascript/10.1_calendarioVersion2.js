@@ -180,13 +180,12 @@ const getCalendario  = (options, slideElement) => {
 					diaSeleccionado[i].onclick = () =>{
 						fechaFinal = new Date( diaSeleccionado[i].getAttribute('dateDefault') );
 						fechaFinal = getJsonDate(fechaFinal);
-						// console.log('Querrrrooooo', fechaFinal)
+						diaSeleccionado[i].classList.add('random-class');
+						diaSeleccionado[i].style.backgroundColor = '#bb9457';
+
 						if(options.sinceTo.length === 2){
 							options.sinceTo.shift();	
 							options.sinceTo.push(fechaFinal)
-							// marcarFechas(options.sinceTo)
-							// marcar las fechas que serán creadas las actividades
-							
 						} else {
 							options.sinceTo.push(fechaFinal)
 						}

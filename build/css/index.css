@@ -611,10 +611,12 @@ div {
   color: #fff;
 }
 
+.random-marked {
+  background: #48cae4;
+}
 .random-module {
   width: 100%;
   height: 100%;
-  border: 2px solid;
 }
 .random-module .header-module {
   height: 60px;
@@ -626,33 +628,60 @@ div {
   height: calc(100% - 60px);
   display: flex;
   flex-direction: column;
-  border: 2px solid #f00;
 }
 .random-module .container-module .calendar-area {
-  height: 40%;
+  height: 300px;
   display: flex;
-  border: 1px solid #f00;
 }
 .random-module .container-module .calendar-area .preview-calendar {
   flex: 2;
-  border: 1px solid;
 }
 .random-module .container-module .calendar-area .options-calendar {
   flex: 1;
-  border: 1px solid;
+  flex-direction: column;
+  display: flex;
+  border: 2px solid;
 }
-.random-module .container-module .actividades-area {
-  height: 70%;
+.random-module .container-module .calendar-area .options-calendar .info-group {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  border: 2px solid #008000;
+  border: 1px solid #f00;
+}
+.random-module .container-module .calendar-area .options-calendar .info-group .item-fecha-s {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: space-around;
+  border: 1px solid #808080;
+  font-size: 0.8em;
+}
+.random-module .container-module .calendar-area .options-calendar .info-group .item-fecha-s .tle {
+  width: 60px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+}
+.random-module .container-module .calendar-area .options-calendar .info-group .item-fecha-s .vle {
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+}
+.random-module .container-module .calendar-area .options-calendar .buttons-container {
+  flex: 1;
+  border: 2px solid #00f;
+}
+.random-module .container-module .actividades-area {
+  height: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
 }
 .random-module .container-module .actividades-area .formulario {
   width: 100%;
   height: 60px;
   display: flex;
   align-items: center;
-  border: 1px solid;
 }
 .random-module .container-module .actividades-area .formulario .input-actividad {
   flex: 1;
@@ -660,13 +689,13 @@ div {
   min-height: 35px;
   padding: 5px;
   font-size: 0.8em;
+  font-weight: bold;
   border: 1px solid rgba(0,0,0,0.2);
 }
 .random-module .container-module .actividades-area .despliegue-actividades {
   width: 100%;
   height: calc(100% - 60px);
   overflow: auto;
-  border: 2px solid #00f;
 }
 .random-module .container-module .actividades-area .despliegue-actividades .marked {
   background: #48cae4;
@@ -679,31 +708,31 @@ div {
   color: #808080;
   border: 1px solid rgba(0,0,0,0.2);
 }
-.random-module .container-module .actividades-area .despliegue-actividades .item-act-random:hover {
-  border: 1px solid #808080;
-}
 .random-module .container-module .actividades-area .despliegue-actividades .item-act-random .agarrate-act {
   display: flex;
-  min-height: 40px;
+  min-height: 30px;
   flex: 2;
-  border: 1px solid;
+  display: flex;
   align-items: center;
 }
 .random-module .container-module .actividades-area .despliegue-actividades .item-act-random .agarrate-act .random-ref {
-  width: 80px;
+  width: 50px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  border: 1px solid;
+}
+.random-module .container-module .actividades-area .despliegue-actividades .item-act-random .agarrate-act .description-ref {
+  flex: 1;
+  text-align: justify;
+  font-size: 0.9em;
 }
 .random-module .container-module .actividades-area .despliegue-actividades .item-act-random .options-act-random {
   width: 70px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid #f00;
 }
 .random-module .container-module .actividades-area .despliegue-actividades .item-act-random .options-act-random .option-act {
   color: #6c757d;
@@ -715,6 +744,9 @@ div {
   border-radius: 13px;
 }
 
+.random-class {
+  background: #bb9457;
+}
 .area-actividades {
   width: 100%;
   height: 200px;

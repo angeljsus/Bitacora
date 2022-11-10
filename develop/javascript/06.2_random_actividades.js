@@ -41,8 +41,10 @@ function htmlRandomActividades(){
 				<div class="calendar-area">
 					<div class="preview-calendar" id="calendar3"></div>
 					<div class="options-calendar">
-						<button onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>
-						<div id="infoRandomSeleccion"></div>
+						<div class="info-group" id="infoRandomSeleccion"></div>
+						<div class="buttons-container">
+							<button onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>
+						</div>
 					</div>
 				</div>
 				<!--ACTIVIDADES-->
@@ -63,10 +65,17 @@ function htmlRandomActividades(){
 					<!--FORM-->
 
 					<!--ACTS-->
-					<div class="despliegue-actividades">
-						<div class="item-act-random">
+					<div class="despliegue-actividades" id="listaActividades">
+						<!--<div class="item-act-random">
 							<div class="agarrate-act">
 								<div class="random-ref">100</div>
+								<div class="description-ref">
+									ñkasdasdm asd asd as da dsasd asd a ds
+									ñkasdasdm asd asd as da dsasd asd a ds
+									ñkasdasdm asd asd as da dsasd asd a ds
+									ñkasdasdm asd asd as da dsasd asd a ds
+									ñkasdasdm asd asd as da dsasd asd a ds
+								</div>
 							</div>
 							<div class="options-act-random">
 								<div class="option-act">
@@ -76,9 +85,7 @@ function htmlRandomActividades(){
 									<span class="material-icons">delete_forever</span>
 								</div>
 							</div>
-						</div>
-
-						<div class="item-act-random"><div class="agarrate-act"></div></div>
+						</div>-->
 
 					</div>
 					<!--ACTS-->
@@ -114,7 +121,7 @@ function htmlRandomActividades(){
 		.then( object => { getCalendario(object); } )
 
 
-	// mostrarActividadesRegistradas({ rfc: KEY, user: USER_APP})
+	mostrarActividadesRegistradas({ rfc: KEY, user: USER_APP})
 
 }
 

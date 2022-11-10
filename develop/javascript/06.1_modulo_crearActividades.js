@@ -7,7 +7,7 @@ function cargarModuloActividades(){
 
 function guardarDescripcionActividad(){
 	const inputActividad = document.getElementById('inputActividad');
-	const messageActRandom = document.getElementById('messageActRandom');
+	// const messageActRandom = document.getElementById('messageActRandom');
 	const db = getDatabase();
 	const KEY = localStorage.getItem('RFC_KEY');
 	const USER_APP = localStorage.getItem('USER_APP');
@@ -25,12 +25,12 @@ function guardarDescripcionActividad(){
 				console.error(err)	
 			}, function(){
 				inputActividad.textContent = '';
-				messageActRandom.innerHTML = '';
+				// messageActRandom.innerHTML = '';
 				return mostrarActividadesRegistradas({ descripcion_actividad: valorActividad, id_actividad: (key+1), rfcusuario: KEY, claveusr: USER_APP });			
 			})
 		})
 	} else {
-		messageActRandom.innerHTML = 'No contiene descripción su actividad';
+		// messageActRandom.innerHTML = 'No contiene descripción su actividad';
 	}
 }
 
@@ -41,7 +41,7 @@ function getMaxIdActividad(rfc, clave){
 			tx.executeSql(`SELECT max(id_actividad) number FROM TBL_ACTIVIDADES WHERE rfcusuario =? AND claveusr=?`,[rfc, clave], function(tx, results){
 				let number = results.rows[0].number;
 				if(results.rows[0].number === null){
-					number = 1;
+					number = 0;
 				}
 				resolve(number);
 			})
@@ -80,23 +80,14 @@ function mostrarActividadesRegistradas(object){
 		})
 	})
 	.then(function(object){
+		console.warn(object)
 		let { length } = object; 
 		for(let i = 0; i < length; i++){
 			elemento += `
 				<div class="item-act-random" id="fatherRandom-${object[i].id_actividad}">
-					<div class="agarrate-act">
-						<input
-							name="checkerList" 
-							class="checker" 
-							type="checkbox" 
-							id="random-${object[i].id_actividad}">
-							<div class="idact" >${object[i].id_actividad}</div>
-							<label 
-								id="label-random-${object[i].id_actividad}"
-								onclick="marcarActividadRandom('random-${object[i].id_actividad}', 'fatherRandom-${object[i].id_actividad}')" 
-								for="random-${object[i].id_actividad}">
-									${object[i].descripcion_actividad}
-							</label>
+					<div class="agarrate-act" onclick="marcarRandom(this)" idActividad="${object[i].id_actividad}">
+						<div class="random-ref">${object[i].id_actividad}</div>
+						<div class="description-ref" id="randomId-${object[i].id_actividad}">${object[i].descripcion_actividad}</div>
 					</div>
 					<div class="options-act-random">
 						<div class="option-act">
@@ -114,6 +105,20 @@ function mostrarActividadesRegistradas(object){
 	})
 }
 
+const marcarRandom = e => {
+	const className = 'random-marked';
+	const stringId = 'fatherRandom-' + e.getAttribute('idActividad'); 
+	const parentElement = document.getElementById(stringId);
+	const clases = parentElement.classList.toString().search(className)
+	if(clases >= 0){
+		parentElement.classList.remove(className);
+
+		e.removeAttribute('estadoRandom','selected')
+	} else {
+		parentElement.classList.add(className)
+		e.setAttribute('estadoRandom','selected')
+	}
+} 
 
 function convertToStringParams(object){
 	let params = JSON.stringify(object);
@@ -316,17 +321,17 @@ function crearObjectFecha(cadena){
 	}
 }
 
-function marcarActividadRandom(cadenaId, row){
-	let status = document.getElementById(cadenaId);
-	let padre = document.getElementById(row);
-	console.log(status)
-	console.log(row)
-	if (!status.checked) {
-		padre.classList.add('marked');
-	} else {
-		padre.classList.remove('marked');
-	}
-}
+// function marcarActividadRandom(cadenaId, row){
+// 	let status = document.getElementById(cadenaId);
+// 	let padre = document.getElementById(row);
+// 	console.log(status)
+// 	console.log(row)
+// 	if (!status.checked) {
+// 		padre.classList.add('marked');
+// 	} else {
+// 		padre.classList.remove('marked');
+// 	}
+// }
 
 function deleteRegistrosPrevios(object, rfc, user){
 	const db = getDatabase()
@@ -397,7 +402,7 @@ function actualizarRandomActividad(object){
 	// let object = JSON.parse(objectString.replace(/'/g,'"'));
 	const db = getDatabase()
 	const inputActividad = document.getElementById('inputActividad');
-	const messageActRandom = document.getElementById('messageActRandom');
+	// const messageActRandom = document.getElementById('messageActRandom');
 	const btGuardarRandom = document.getElementById('btGuardarRandom');
 	let value = inputActividad.textContent; 
 
@@ -405,7 +410,7 @@ function actualizarRandomActividad(object){
 		if(value !== ''){
 			resolve()
 		}
-		messageActRandom.innerHTML = 'La actividad no puede estar vacia'		
+		// messageActRandom.innerHTML = 'La actividad no puede estar vacia'		
 	})
 	.then(function(){
 		return new Promise(function(resolve, reject){
@@ -419,10 +424,12 @@ function actualizarRandomActividad(object){
 		})
 	})
 	.then(function(){
-		messageActRandom.innerHTML = '¡Registro actualizado!'		
+		// messageActRandom.innerHTML = '¡Registro actualizado!'		
 		inputActividad.innerHTML = '';
 		btGuardarRandom.setAttribute('onclick', `guardarDescripcionActividad()`);
-		document.getElementById('label-random-'+object.id_actividad).innerHTML = value;
+		btGuardarRandom.innerHTML = 'GUARDAR'
+		const element = document.getElementById('randomId-'+object.id_actividad);
+		element ? element.innerHTML = value : '';
 	})
 
 }
@@ -434,33 +441,47 @@ const marcarFechas = array => {
 	let start = 0;
 	let end = 0;
 
-	const uno = array[0].value.replace(/-/g,'');
-	const dos = array[1].value.replace(/-/g,'');
-	if(uno >= dos){
-		start = array[1];
-		end = array[0];
+	const dias = document.getElementsByClassName('day');
+	let searchR = -1;
+	for(let i = 0; i < dias.length; i++){
+		if(dias[i].hasAttribute('id')){
+			searchR = dias[i].classList.toString().search(/random-class/g)
+			if(searchR >= 0){
+				dias[i].classList.remove('random-class');
+				dias[i].style.backgroundColor = 'white'
+			}
+		}
 	}
-	if(dos >= uno){
-		start = array[0];
-		end = array[1];
-	}
+
 	let element = null;
 	getDatesSegunStatus()
 	.then( array => {
 		array.map( day => {
 			element = document.getElementById(day.id);
+			// devuelve color anteriormente marcado
 			element ? element.style.backgroundColor = day.colorToGroup : false
 		})
 		console.log('#1 ', array)
+		return;
 	})
 	.then(() => {
-		console.log('#2 ', array)
+		const uno = array[0].default
+		const dos = array[1].default
+		if(uno >= dos){
+			start = array[1];
+			end = array[0];
+		}
+		if(dos >= uno){
+			start = array[0];
+			end = array[1];
+		}
+		// console.log('#2 ', array)
 		start.diaObject = getStringDia(start.dayWeek);
 		end.diaObject = getStringDia(end.dayWeek);
 		const infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
 		const specific = getDiasFestivos(); 
 		const valores = getDatesArray(start.default, end.default,{ daysOfWeek:[0,6], specific: specific})
-		// console.log(valores)
+		console.log('#2',valores)
 		valores.map( ({id, value, colorToGroup, full, disabled, month, year}) => {
 			if(month === 11 && year === 2022){
 				console.log('%s %s', colorToGroup, full)
@@ -468,31 +489,26 @@ const marcarFechas = array => {
 			if(disabled === false){
 				// id-18-11-2022
 				element = document.getElementById(id);
-				// if(colorToGroup){
-					element ? element.style.backgroundColor = '#01baef' : ''
-				// }
-				// else {
-					// element ? element.style.backgroundColor = 'white' : ''
-				// }
+				if(element){
+					element.classList.add('random-class');
+					element.style.backgroundColor = '#bb9457';
+					// element.style.color = 'white';
+				}
+				// console.log(colorToGroup)
+				
 			} 
 		})
-		console.log('[]',start)
 		infoRandomSeleccion.innerHTML = `<br>
-		<div>COMIENZO: ${start.diaObject.string} ${start.full}</div><br>
-		<div>FIN: ${end.diaObject.string} ${end.full}</div>
+		<div class="item-fecha-s">
+			<div class="tle">INICIO:</div><div class="vle">${start.diaObject.string} ${start.full}</div>
+		</div>
+		<div class="item-fecha-s">
+			<div class="tle">FIN:</div><div class="vle">${end.diaObject.string} ${end.full}</div>
+		</div>
 		`;
 	})
 	// options.global.map( day => {
 	// 	element = document.getElementById(day.id);
 	// 	element ? element.style.backgroundColor = day.colorToGroup : false
-	// })
-
-
-	// console.log('start: ', start)
-	// console.log('end: ', end)
-	// array.map( date => {
-		// let key = date.value.replace(/-/g.'');
-
-		// console.log(date)
 	// })
 }
