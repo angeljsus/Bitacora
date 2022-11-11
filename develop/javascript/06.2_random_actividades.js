@@ -14,6 +14,7 @@ function cargaRandomActividades(rfc){
 
 
 let _arrayDates = [];
+let _arrayOpts = [];
 
 function htmlRandomActividades(){
 	_arrayDates = [];
@@ -42,8 +43,8 @@ function htmlRandomActividades(){
 					<div class="preview-calendar" id="calendar3"></div>
 					<div class="options-calendar">
 						<div class="info-group" id="infoRandomSeleccion"></div>
-						<div class="buttons-container">
-							<button onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>
+						<div class="buttons-container" id="randomSeleccionBtns">
+							<!--<button  class="btn-regular" onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>-->
 						</div>
 					</div>
 				</div>

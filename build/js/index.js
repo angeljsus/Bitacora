@@ -3132,34 +3132,44 @@ function actualizarRandomActividad(object) {
 } // MODULO DE RAN
 
 
-var marcarFechas = function marcarFechas(array) {
-  // console.warn(array)
-  var start = 0;
-  var end = 0;
-  var dias = document.getElementsByClassName('day');
-  var searchR = -1;
+var desmarcarMarcar = function desmarcarMarcar() {
+  return getDatesSegunStatus().then(function (array) {
+    // volver a estado original días sin marcar
+    var dias = document.getElementsByClassName('day');
+    var searchR = -1;
 
-  for (var i = 0; i < dias.length; i++) {
-    if (dias[i].hasAttribute('id')) {
-      searchR = dias[i].classList.toString().search(/random-class/g);
+    for (var i = 0; i < dias.length; i++) {
+      if (dias[i].hasAttribute('id')) {
+        searchR = dias[i].classList.toString().search(/random-class/g);
 
-      if (searchR >= 0) {
-        dias[i].classList.remove('random-class');
-        dias[i].style.backgroundColor = 'white';
+        if (searchR >= 0) {
+          dias[i].classList.remove('random-class');
+          dias[i].style.backgroundColor = 'white';
+        }
       }
-    }
-  }
+    } // volver a estado original días sin marcar
+    // marcar estado segun estan en bd
 
-  var element = null;
-  getDatesSegunStatus().then(function (array) {
+
+    var element = null;
     array.map(function (day) {
       element = document.getElementById(day.id); // devuelve color anteriormente marcado
 
       element ? element.style.backgroundColor = day.colorToGroup : false;
-    });
-    console.log('#1 ', array);
-    return;
-  }).then(function () {
+    }); // marcar estado segun estan en bd
+
+    return array;
+  });
+};
+
+var marcarFechas = function marcarFechas(array) {
+  // console.warn(array)
+  var start = 0;
+  var end = 0;
+  var element = null;
+  var infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
+  var randomSeleccionBtns = document.getElementById('randomSeleccionBtns');
+  desmarcarMarcar().then(function () {
     var uno = array[0]["default"];
     var dos = array[1]["default"];
 
@@ -3176,7 +3186,6 @@ var marcarFechas = function marcarFechas(array) {
 
     start.diaObject = getStringDia(start.dayWeek);
     end.diaObject = getStringDia(end.dayWeek);
-    var infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
     var specific = getDiasFestivos();
     var valores = getDatesArray(start["default"], end["default"], {
       daysOfWeek: [0, 6],
@@ -3207,11 +3216,26 @@ var marcarFechas = function marcarFechas(array) {
 
       }
     });
-    infoRandomSeleccion.innerHTML = "<br>\n\t\t<div class=\"item-fecha-s\">\n\t\t\t<div class=\"tle\">INICIO:</div><div class=\"vle\">".concat(start.diaObject.string, " ").concat(start.full, "</div>\n\t\t</div>\n\t\t<div class=\"item-fecha-s\">\n\t\t\t<div class=\"tle\">FIN:</div><div class=\"vle\">").concat(end.diaObject.string, " ").concat(end.full, "</div>\n\t\t</div>\n\t\t");
-  }); // options.global.map( day => {
-  // 	element = document.getElementById(day.id);
-  // 	element ? element.style.backgroundColor = day.colorToGroup : false
-  // })
+    infoRandomSeleccion.innerHTML = "<br>\n\t\t<div class=\"item-fecha-s\">\n\t\t\t<div class=\"tle\">INICIO:</div><div class=\"vle\">".concat(start.diaObject.string, ", ").concat(start.full, "</div>\n\t\t</div>\n\t\t<div class=\"item-fecha-s\">\n\t\t\t<div class=\"tle\">FIN:</div><div class=\"vle\">").concat(end.diaObject.string, ", ").concat(end.full, "</div>\n\t\t</div>\n\t\t");
+    randomSeleccionBtns.innerHTML = "\n\t\t\t<button  class=\"btn-option\" onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">GENERAR</button>\n\t\t\t<button  class=\"btn-option\" id=\"cancelable\">CANCELAR</button>\n\t\t");
+  }).then(function () {
+    var cancelable = document.getElementById('cancelable');
+
+    cancelable.onclick = function () {
+      return desmarcarMarcar().then(function () {
+        _arrayDates.splice(0, _arrayDates.length);
+
+        randomSeleccionBtns.innerHTML = '';
+        infoRandomSeleccion.innerHTML = '';
+      });
+    };
+  });
+};
+
+var cancelarRandomSelection = function cancelarRandomSelection(arrayMarked) {
+  return desmarcarMarcar().then(function (array) {
+    console.log(arrayMarked);
+  });
 };
 "use strict";
 
@@ -3222,6 +3246,7 @@ function cargaRandomActividades(rfc) {
 }
 
 var _arrayDates = [];
+var _arrayOpts = [];
 
 function htmlRandomActividades() {
   _arrayDates = [];
@@ -3235,7 +3260,7 @@ function htmlRandomActividades() {
     optionsBarFloar.insertAdjacentHTML('afterbegin', "\n\t\t\t<button id=\"backDates\" class=\"btn-otros\" onclick=\"regresaFechasActual()\">\n\t\t\t\t<span class=\"material-icons\">low_priority</span>\n\t\t\t</button>");
   }
 
-  var html = "\n\t\t<div class=\"random-module\">\n\t\t\t<!--HEADER-->\n\t\t\t<div class=\"header-module\"></div>\n\t\t\t<!--HEADER-->\n\t\t\t\t<!--MODULO-->\n\t\t\t<div class=\"container-module\">\n\t\t\t\t<div class=\"calendar-area\">\n\t\t\t\t\t<div class=\"preview-calendar\" id=\"calendar3\"></div>\n\t\t\t\t\t<div class=\"options-calendar\">\n\t\t\t\t\t\t<div class=\"info-group\" id=\"infoRandomSeleccion\"></div>\n\t\t\t\t\t\t<div class=\"buttons-container\">\n\t\t\t\t\t\t\t<button onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">getArray</button>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t\t<div class=\"actividades-area\">\n\t\t\t\t\t<!--FORM-->\n\t\t\t\t\t<div class=\"formulario\">\n\t\t\t\t\t\t<span \n\t\t\t\t\t\t\tname=\"optActividad\" \n\t\t\t\t\t\t\tonclick=\"counterValues(this.id)\" \n\t\t\t\t\t\t\tclass=\"input-actividad editable\" \n\t\t\t\t\t\t\trole=\"input\" type=\"text\" \n\t\t\t\t\t\t\tdata-placeholder=\"Descripci\xF3n de la actividad\" \n\t\t\t\t\t\t\tid=\"inputActividad\" \n\t\t\t\t\t\t\tcontenteditable>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<button class=\"btn-regular\" onclick=\"guardarDescripcionActividad()\" id=\"btGuardarRandom\">GUARDAR</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--FORM-->\n\n\t\t\t\t\t<!--ACTS-->\n\t\t\t\t\t<div class=\"despliegue-actividades\" id=\"listaActividades\">\n\t\t\t\t\t\t<!--<div class=\"item-act-random\">\n\t\t\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t\t\t<div class=\"random-ref\">100</div>\n\t\t\t\t\t\t\t\t<div class=\"description-ref\">\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\" >edit</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\">delete_forever</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>-->\n\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--ACTS-->\n\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t</div>\n\t\t\t\t<!--MODULO-->\n\n\t\t</div>\n\t");
+  var html = "\n\t\t<div class=\"random-module\">\n\t\t\t<!--HEADER-->\n\t\t\t<div class=\"header-module\"></div>\n\t\t\t<!--HEADER-->\n\t\t\t\t<!--MODULO-->\n\t\t\t<div class=\"container-module\">\n\t\t\t\t<div class=\"calendar-area\">\n\t\t\t\t\t<div class=\"preview-calendar\" id=\"calendar3\"></div>\n\t\t\t\t\t<div class=\"options-calendar\">\n\t\t\t\t\t\t<div class=\"info-group\" id=\"infoRandomSeleccion\"></div>\n\t\t\t\t\t\t<div class=\"buttons-container\" id=\"randomSeleccionBtns\">\n\t\t\t\t\t\t\t<!--<button  class=\"btn-regular\" onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">getArray</button>-->\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t\t<div class=\"actividades-area\">\n\t\t\t\t\t<!--FORM-->\n\t\t\t\t\t<div class=\"formulario\">\n\t\t\t\t\t\t<span \n\t\t\t\t\t\t\tname=\"optActividad\" \n\t\t\t\t\t\t\tonclick=\"counterValues(this.id)\" \n\t\t\t\t\t\t\tclass=\"input-actividad editable\" \n\t\t\t\t\t\t\trole=\"input\" type=\"text\" \n\t\t\t\t\t\t\tdata-placeholder=\"Descripci\xF3n de la actividad\" \n\t\t\t\t\t\t\tid=\"inputActividad\" \n\t\t\t\t\t\t\tcontenteditable>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<button class=\"btn-regular\" onclick=\"guardarDescripcionActividad()\" id=\"btGuardarRandom\">GUARDAR</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--FORM-->\n\n\t\t\t\t\t<!--ACTS-->\n\t\t\t\t\t<div class=\"despliegue-actividades\" id=\"listaActividades\">\n\t\t\t\t\t\t<!--<div class=\"item-act-random\">\n\t\t\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t\t\t<div class=\"random-ref\">100</div>\n\t\t\t\t\t\t\t\t<div class=\"description-ref\">\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\" >edit</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\">delete_forever</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>-->\n\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--ACTS-->\n\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t</div>\n\t\t\t\t<!--MODULO-->\n\n\t\t</div>\n\t");
   console.log(areaOtrosRegistros);
   areaOtrosRegistros.innerHTML = html;
   areaOtrosRegistros.style.display = 'flex';

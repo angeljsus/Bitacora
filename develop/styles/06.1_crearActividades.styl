@@ -17,7 +17,7 @@
 		.calendar-area
 			height 300px
 			display flex
-			// border 1px solid red
+			border 1px solid rgba(0,0,0,0.2)
 			.preview-calendar
 				flex 2
 				// border 1px solid
@@ -25,33 +25,48 @@
 				flex 1
 				flex-direction column
 				display flex
-				border 2px solid
+				// border 2px solid
+				border 1px solid rgba(0,0,0,0.2)
 				.info-group
 					flex 2
 					display flex
 					flex-direction column
 					// align-items space-around
-					border 1px solid red
+					// border 1px solid red
 					.item-fecha-s
 						width 100%
 						height 60px
 						display flex
 						align-items space-around
-						border 1px solid gray
+						background #edf2f4
+						// border 1px solid gray
 						font-size .8em
 						.tle
-							width 60px
 							font-weight bold
+							flex 1
 							display flex
 							align-items center
-							border 1px solid
+							// border 1px solid
 						.vle
+							flex 3
 							display flex
 							align-items center
-							border 1px solid
+							// border 1px solid
 				.buttons-container
 					flex 1
-					border 2px solid blue
+					display flex
+					flex-direction column
+					align-items center
+					.btn-option
+						margin 5px
+						height 30px
+						width 100px
+						border none
+						font-weight bold
+						background #00b4d8
+						&:hover
+							border 1px solid
+							color white
 		.actividades-area
 			height calc(100% - 300px)
 			display flex
@@ -70,6 +85,8 @@
 					padding 5px
 					font-size .8em
 					font-weight bold
+					display flex
+					align-items center
 					border 1px solid rgba(0,0,0,0.2)
 			.despliegue-actividades
 				width 100%

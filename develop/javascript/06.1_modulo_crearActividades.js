@@ -436,34 +436,44 @@ function actualizarRandomActividad(object){
 
 
 // MODULO DE RAN
-const marcarFechas = array => {
-	// console.warn(array)
-	let start = 0;
-	let end = 0;
 
-	const dias = document.getElementsByClassName('day');
-	let searchR = -1;
-	for(let i = 0; i < dias.length; i++){
-		if(dias[i].hasAttribute('id')){
-			searchR = dias[i].classList.toString().search(/random-class/g)
-			if(searchR >= 0){
-				dias[i].classList.remove('random-class');
-				dias[i].style.backgroundColor = 'white'
-			}
-		}
-	}
-
-	let element = null;
-	getDatesSegunStatus()
+const desmarcarMarcar = () => {
+	return getDatesSegunStatus()
 	.then( array => {
+		// volver a estado original días sin marcar
+		const dias = document.getElementsByClassName('day');
+		let searchR = -1;
+		for(let i = 0; i < dias.length; i++){
+			if(dias[i].hasAttribute('id')){
+				searchR = dias[i].classList.toString().search(/random-class/g)
+				if(searchR >= 0){
+					dias[i].classList.remove('random-class');
+					dias[i].style.backgroundColor = 'white'
+				}
+			}
+		}	
+		// volver a estado original días sin marcar
+		// marcar estado segun estan en bd
+		let element = null;
 		array.map( day => {
 			element = document.getElementById(day.id);
 			// devuelve color anteriormente marcado
 			element ? element.style.backgroundColor = day.colorToGroup : false
 		})
-		console.log('#1 ', array)
-		return;
+		// marcar estado segun estan en bd
+		return array;
 	})
+}
+
+const marcarFechas = array => {
+	// console.warn(array)
+	let start = 0;
+	let end = 0;
+	let element = null;
+	const infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
+	const randomSeleccionBtns = document.getElementById('randomSeleccionBtns');
+
+	desmarcarMarcar()
 	.then(() => {
 		const uno = array[0].default
 		const dos = array[1].default
@@ -478,7 +488,7 @@ const marcarFechas = array => {
 		// console.log('#2 ', array)
 		start.diaObject = getStringDia(start.dayWeek);
 		end.diaObject = getStringDia(end.dayWeek);
-		const infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
+
 		const specific = getDiasFestivos(); 
 		const valores = getDatesArray(start.default, end.default,{ daysOfWeek:[0,6], specific: specific})
 		console.log('#2',valores)
@@ -500,15 +510,33 @@ const marcarFechas = array => {
 		})
 		infoRandomSeleccion.innerHTML = `<br>
 		<div class="item-fecha-s">
-			<div class="tle">INICIO:</div><div class="vle">${start.diaObject.string} ${start.full}</div>
+			<div class="tle">INICIO:</div><div class="vle">${start.diaObject.string}, ${start.full}</div>
 		</div>
 		<div class="item-fecha-s">
-			<div class="tle">FIN:</div><div class="vle">${end.diaObject.string} ${end.full}</div>
+			<div class="tle">FIN:</div><div class="vle">${end.diaObject.string}, ${end.full}</div>
 		</div>
 		`;
+		randomSeleccionBtns.innerHTML=`
+			<button  class="btn-option" onclick="leerArreglo(${JSON.stringify(_arrayDates)})">GENERAR</button>
+			<button  class="btn-option" id="cancelable">CANCELAR</button>
+		`;
 	})
-	// options.global.map( day => {
-	// 	element = document.getElementById(day.id);
-	// 	element ? element.style.backgroundColor = day.colorToGroup : false
-	// })
+	.then( () => {
+		const cancelable = document.getElementById('cancelable');
+		cancelable.onclick = () => {
+				return desmarcarMarcar()
+				.then( () => {
+					_arrayDates.splice(0,_arrayDates.length)
+					randomSeleccionBtns.innerHTML = '';
+					infoRandomSeleccion.innerHTML = '';
+				});
+		}
+	})
+}
+
+const cancelarRandomSelection = arrayMarked => {
+	return desmarcarMarcar()
+	.then( array => {
+		console.log(arrayMarked)
+	});
 }

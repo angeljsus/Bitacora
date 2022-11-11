@@ -632,6 +632,7 @@ div {
 .random-module .container-module .calendar-area {
   height: 300px;
   display: flex;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 .random-module .container-module .calendar-area .preview-calendar {
   flex: 2;
@@ -640,37 +641,49 @@ div {
   flex: 1;
   flex-direction: column;
   display: flex;
-  border: 2px solid;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 .random-module .container-module .calendar-area .options-calendar .info-group {
   flex: 2;
   display: flex;
   flex-direction: column;
-  border: 1px solid #f00;
 }
 .random-module .container-module .calendar-area .options-calendar .info-group .item-fecha-s {
   width: 100%;
   height: 60px;
   display: flex;
   align-items: space-around;
-  border: 1px solid #808080;
+  background: #edf2f4;
   font-size: 0.8em;
 }
 .random-module .container-module .calendar-area .options-calendar .info-group .item-fecha-s .tle {
-  width: 60px;
   font-weight: bold;
+  flex: 1;
   display: flex;
   align-items: center;
-  border: 1px solid;
 }
 .random-module .container-module .calendar-area .options-calendar .info-group .item-fecha-s .vle {
+  flex: 3;
   display: flex;
   align-items: center;
-  border: 1px solid;
 }
 .random-module .container-module .calendar-area .options-calendar .buttons-container {
   flex: 1;
-  border: 2px solid #00f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.random-module .container-module .calendar-area .options-calendar .buttons-container .btn-option {
+  margin: 5px;
+  height: 30px;
+  width: 100px;
+  border: none;
+  font-weight: bold;
+  background: #00b4d8;
+}
+.random-module .container-module .calendar-area .options-calendar .buttons-container .btn-option:hover {
+  border: 1px solid;
+  color: #fff;
 }
 .random-module .container-module .actividades-area {
   height: calc(100% - 300px);
@@ -690,6 +703,8 @@ div {
   padding: 5px;
   font-size: 0.8em;
   font-weight: bold;
+  display: flex;
+  align-items: center;
   border: 1px solid rgba(0,0,0,0.2);
 }
 .random-module .container-module .actividades-area .despliegue-actividades {
