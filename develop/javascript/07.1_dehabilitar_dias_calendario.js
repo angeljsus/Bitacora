@@ -214,6 +214,13 @@ const getDatesSegunStatus = () => {
 							.then(cnt => cnt === object.length ? resolve( object ) : '' )
 						}
 					})
+					.then( array => {
+						_arrayEstadosFechas.splice(0,_arrayEstadosFechas.length);
+						array.map(item => {
+							_arrayEstadosFechas.push(item);
+						})
+						return _arrayEstadosFechas
+					})
 					.then( array => queryResolve(array) )
 				}
 				queryResolve([]);

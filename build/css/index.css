@@ -668,7 +668,7 @@ div {
   align-items: center;
 }
 .random-module .container-module .calendar-area .options-calendar .buttons-container {
-  flex: 1;
+  flex: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -684,6 +684,16 @@ div {
 .random-module .container-module .calendar-area .options-calendar .buttons-container .btn-option:hover {
   border: 1px solid;
   color: #fff;
+}
+.random-module .container-module .calendar-area .options-calendar .messages-container {
+  flex: 1;
+  font-size: 0.8em;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: #fca311;
 }
 .random-module .container-module .actividades-area {
   height: calc(100% - 300px);

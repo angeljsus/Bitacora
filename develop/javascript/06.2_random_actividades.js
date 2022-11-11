@@ -13,8 +13,10 @@ function cargaRandomActividades(rfc){
 }
 
 
+// seleccion de dos fechas solamente
 let _arrayDates = [];
-let _arrayOpts = [];
+// actualizacion del status de las fechas
+let _arrayEstadosFechas = [];
 
 function htmlRandomActividades(){
 	_arrayDates = [];
@@ -46,6 +48,7 @@ function htmlRandomActividades(){
 						<div class="buttons-container" id="randomSeleccionBtns">
 							<!--<button  class="btn-regular" onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>-->
 						</div>
+						<div class="messages-container" id="messageRandomContainer"></div>
 					</div>
 				</div>
 				<!--ACTIVIDADES-->
@@ -114,18 +117,18 @@ function htmlRandomActividades(){
 				// eachMonth:[ { day:21, month:9}, { day:21, month:10} ],
 				specific: specific
 			},
-			sinceTo: _arrayDates
-			// global: globalArray
+			sinceTo: _arrayDates,
+			global: _arrayEstadosFechas
 		}
 			getDatesSegunStatus()
-		.then( array => { data.global = array; return data; } )
-		.then( object => { getCalendario(object); } )
+		// .then( array => { data.global = _arrayEstadosFechas; return _arrayEstadosFechas; } )
+		.then( object => { 
+			// _arrayEstadosFechas = object;
+			console.log(data)
+			getCalendario(data); 
+		} )
 
 
 	mostrarActividadesRegistradas({ rfc: KEY, user: USER_APP})
 
-}
-
-const leerArreglo = () => {
-	console.warn(_arrayDates)
 }
