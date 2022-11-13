@@ -494,63 +494,63 @@ function cargarActividades(rfc, date, userApp){
 				elementoNuevo += '<div class="display-actividades" id="divDisplayActividades">';
 				if (cantResults > 0) {
 					console.log('cargar inputs guardados')
-							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 1" id="inpActiv0" contenteditable>${decodeCaracteres(results.rows[0].campo_1).slice(0,200)}</span></div>`;
-							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 2" id="inpActiv1" contenteditable>${decodeCaracteres(results.rows[0].campo_2).slice(0,200)}</span></div>`;
-							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 3" id="inpActiv2" contenteditable>${decodeCaracteres(results.rows[0].campo_3).slice(0,200)}</span></div>`;
-							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 4" id="inpActiv3" contenteditable>${decodeCaracteres(results.rows[0].campo_4).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 1" id="inpActiv0" contenteditable>${decodeCaracteres(results.rows[0].campo_1).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 2" id="inpActiv1" contenteditable>${decodeCaracteres(results.rows[0].campo_2).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 3" id="inpActiv2" contenteditable>${decodeCaracteres(results.rows[0].campo_3).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 4" id="inpActiv3" contenteditable>${decodeCaracteres(results.rows[0].campo_4).slice(0,200)}</span></div>`;
 						if (results.rows[0].campo_5 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 5" id="inpActiv4" contenteditable>${decodeCaracteres(results.rows[0].campo_5).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 5" id="inpActiv4" contenteditable>${decodeCaracteres(results.rows[0].campo_5).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_6 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 6" id="inpActiv5" contenteditable>${decodeCaracteres(results.rows[0].campo_6).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 6" id="inpActiv5" contenteditable>${decodeCaracteres(results.rows[0].campo_6).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_7 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 7" id="inpActiv6" contenteditable>${decodeCaracteres(results.rows[0].campo_7).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 7" id="inpActiv6" contenteditable>${decodeCaracteres(results.rows[0].campo_7).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_8 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 8" id="inpActiv7" contenteditable>${decodeCaracteres(results.rows[0].campo_8).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 8" id="inpActiv7" contenteditable>${decodeCaracteres(results.rows[0].campo_8).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_9 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 9" id="inpActiv8" contenteditable>${decodeCaracteres(results.rows[0].campo_9).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 9" id="inpActiv8" contenteditable>${decodeCaracteres(results.rows[0].campo_9).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_10 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 10" id="inpActiv9" contenteditable>${decodeCaracteres(results.rows[0].campo_10).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 10" id="inpActiv9" contenteditable>${decodeCaracteres(results.rows[0].campo_10).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_11 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 11" id="inpActiv10" contenteditable>${decodeCaracteres(results.rows[0].campo_11).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 11" id="inpActiv10" contenteditable>${decodeCaracteres(results.rows[0].campo_11).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_12 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 12" id="inpActiv11" contenteditable>${decodeCaracteres(results.rows[0].campo_12).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 12" id="inpActiv11" contenteditable>${decodeCaracteres(results.rows[0].campo_12).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_13 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 13" id="inpActiv12" contenteditable>${decodeCaracteres(results.rows[0].campo_13).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 13" id="inpActiv12" contenteditable>${decodeCaracteres(results.rows[0].campo_13).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_14 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 14" id="inpActiv13" contenteditable>${decodeCaracteres(results.rows[0].campo_14).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 14" id="inpActiv13" contenteditable>${decodeCaracteres(results.rows[0].campo_14).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_15 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 15" id="inpActiv14" contenteditable>${decodeCaracteres(results.rows[0].campo_15).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 15" id="inpActiv14" contenteditable>${decodeCaracteres(results.rows[0].campo_15).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_16 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 16" id="inpActiv15" contenteditable>${decodeCaracteres(results.rows[0].campo_16).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 16" id="inpActiv15" contenteditable>${decodeCaracteres(results.rows[0].campo_16).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_17 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 17" id="inpActiv16" contenteditable>${decodeCaracteres(results.rows[0].campo_17).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 17" id="inpActiv16" contenteditable>${decodeCaracteres(results.rows[0].campo_17).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_18 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 18" id="inpActiv17" contenteditable>${decodeCaracteres(results.rows[0].campo_18).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 18" id="inpActiv17" contenteditable>${decodeCaracteres(results.rows[0].campo_18).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_19 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 19" id="inpActiv18" contenteditable>${decodeCaracteres(results.rows[0].campo_19).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 19" id="inpActiv18" contenteditable>${decodeCaracteres(results.rows[0].campo_19).slice(0,200)}</span></div>`;
 						}
 						if (results.rows[0].campo_20 !== '') {
-							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 20" id="inpActiv19" contenteditable>${decodeCaracteres(results.rows[0].campo_20).slice(0,200)}</span></div>`;
+							elementoNuevo += `<div class="item-actividad" ><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 20" id="inpActiv19" contenteditable>${decodeCaracteres(results.rows[0].campo_20).slice(0,200)}</span></div>`;
 						}
 				} else {
-					elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 1" id="inpActiv0" contenteditable></span></div>
-														<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 2" id="inpActiv1" contenteditable></span></div>
-														<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 3" id="inpActiv2" contenteditable></span></div>
-														<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 4" id="inpActiv3" contenteditable></span></div>`;
+					elementoNuevo += `<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 1" id="inpActiv0" contenteditable></span></div>
+														<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 2" id="inpActiv1" contenteditable></span></div>
+														<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 3" id="inpActiv2" contenteditable></span></div>
+														<div class="item-actividad"><span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad 4" id="inpActiv3" contenteditable></span></div>`;
 					selStatus.value = 0;
 
 				}
@@ -604,9 +604,9 @@ function cargarActividades(rfc, date, userApp){
 })
 }
 
-function counterValues(id){
+function counterValues(id, idMessage){
 	let element = document.getElementById(id);
-	const mensajeRespuestaForm = document.getElementById('mensajeRespuestaForm');
+	const mensajeRespuestaForm = document.getElementById(idMessage);
 	let text = '';
 	let final = '';
 	element.onkeyup = function(key){
@@ -655,7 +655,7 @@ function agregarActividadVacia(){
 			if (inputs == posterior && i < 19) {
 				elementoNuevo = `
 					<div class="item-actividad">
-						<span name="optActividad" onclick="counterValues(this.id)" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad ${posterior + 1}" id="inpActiv${posterior}" contenteditable></span>
+						<span name="optActividad" onclick="counterValues(this.id, 'mensajeRespuestaForm')" class="la-actividad editable" role="input" type="text" data-placeholder="Actividad ${posterior + 1}" id="inpActiv${posterior}" contenteditable></span>
 					</div>`;
 				divDisplayActividades.insertAdjacentHTML('afterbegin', elementoNuevo)
 			}

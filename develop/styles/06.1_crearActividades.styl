@@ -7,8 +7,18 @@
 	.header-module
 		height 60px
 		width 100%
+		display flex
 		background #6c757d
 		color white
+		.title-header
+			height 30px
+			width 100%
+			display flex
+			align-items center
+			justify-content center
+			font-size .8em
+			font-weight bold
+			// border 1px solid
 	.container-module
 		height calc(100% - 60px)
 		display flex
@@ -19,7 +29,9 @@
 			display flex
 			border 1px solid rgba(0,0,0,0.2)
 			.preview-calendar
-				flex 2
+				// flex 2
+				width 400px
+				height 100%
 				// border 1px solid
 			.options-calendar
 				flex 1
@@ -99,6 +111,10 @@
 					display flex
 					align-items center
 					border 1px solid rgba(0,0,0,0.2)
+				.input-actividad:empty:before
+					font-weight none
+					content attr(data-placeholder)
+					color gray
 			.despliegue-actividades
 				width 100%
 				height calc(100% - 60px)

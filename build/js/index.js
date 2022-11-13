@@ -578,76 +578,76 @@ function cargarActividades(rfc, date, userApp) {
 
         if (cantResults > 0) {
           console.log('cargar inputs guardados');
-          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 1\" id=\"inpActiv0\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_1).slice(0, 200), "</span></div>");
-          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 2\" id=\"inpActiv1\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_2).slice(0, 200), "</span></div>");
-          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 3\" id=\"inpActiv2\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_3).slice(0, 200), "</span></div>");
-          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 4\" id=\"inpActiv3\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_4).slice(0, 200), "</span></div>");
+          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 1\" id=\"inpActiv0\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_1).slice(0, 200), "</span></div>");
+          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 2\" id=\"inpActiv1\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_2).slice(0, 200), "</span></div>");
+          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 3\" id=\"inpActiv2\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_3).slice(0, 200), "</span></div>");
+          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 4\" id=\"inpActiv3\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_4).slice(0, 200), "</span></div>");
 
           if (results.rows[0].campo_5 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 5\" id=\"inpActiv4\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_5).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 5\" id=\"inpActiv4\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_5).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_6 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 6\" id=\"inpActiv5\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_6).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 6\" id=\"inpActiv5\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_6).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_7 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 7\" id=\"inpActiv6\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_7).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 7\" id=\"inpActiv6\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_7).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_8 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 8\" id=\"inpActiv7\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_8).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 8\" id=\"inpActiv7\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_8).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_9 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 9\" id=\"inpActiv8\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_9).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 9\" id=\"inpActiv8\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_9).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_10 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 10\" id=\"inpActiv9\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_10).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 10\" id=\"inpActiv9\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_10).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_11 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 11\" id=\"inpActiv10\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_11).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 11\" id=\"inpActiv10\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_11).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_12 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 12\" id=\"inpActiv11\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_12).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 12\" id=\"inpActiv11\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_12).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_13 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 13\" id=\"inpActiv12\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_13).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 13\" id=\"inpActiv12\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_13).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_14 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 14\" id=\"inpActiv13\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_14).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 14\" id=\"inpActiv13\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_14).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_15 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 15\" id=\"inpActiv14\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_15).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 15\" id=\"inpActiv14\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_15).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_16 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 16\" id=\"inpActiv15\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_16).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 16\" id=\"inpActiv15\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_16).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_17 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 17\" id=\"inpActiv16\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_17).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 17\" id=\"inpActiv16\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_17).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_18 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 18\" id=\"inpActiv17\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_18).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 18\" id=\"inpActiv17\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_18).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_19 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 19\" id=\"inpActiv18\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_19).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 19\" id=\"inpActiv18\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_19).slice(0, 200), "</span></div>");
           }
 
           if (results.rows[0].campo_20 !== '') {
-            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 20\" id=\"inpActiv19\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_20).slice(0, 200), "</span></div>");
+            elementoNuevo += "<div class=\"item-actividad\" ><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 20\" id=\"inpActiv19\" contenteditable>".concat(decodeCaracteres(results.rows[0].campo_20).slice(0, 200), "</span></div>");
           }
         } else {
-          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 1\" id=\"inpActiv0\" contenteditable></span></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 2\" id=\"inpActiv1\" contenteditable></span></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 3\" id=\"inpActiv2\" contenteditable></span></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 4\" id=\"inpActiv3\" contenteditable></span></div>";
+          elementoNuevo += "<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 1\" id=\"inpActiv0\" contenteditable></span></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 2\" id=\"inpActiv1\" contenteditable></span></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 3\" id=\"inpActiv2\" contenteditable></span></div>\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t<div class=\"item-actividad\"><span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad 4\" id=\"inpActiv3\" contenteditable></span></div>";
           selStatus.value = 0;
         }
 
@@ -699,9 +699,9 @@ function cargarActividades(rfc, date, userApp) {
   });
 }
 
-function counterValues(id) {
+function counterValues(id, idMessage) {
   var element = document.getElementById(id);
-  var mensajeRespuestaForm = document.getElementById('mensajeRespuestaForm');
+  var mensajeRespuestaForm = document.getElementById(idMessage);
   var text = '';
   var _final = '';
 
@@ -752,7 +752,7 @@ function agregarActividadVacia() {
       posterior = i + 1; // console.log(i)
 
       if (inputs == posterior && i < 19) {
-        elementoNuevo = "\n\t\t\t\t\t<div class=\"item-actividad\">\n\t\t\t\t\t\t<span name=\"optActividad\" onclick=\"counterValues(this.id)\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad ".concat(posterior + 1, "\" id=\"inpActiv").concat(posterior, "\" contenteditable></span>\n\t\t\t\t\t</div>");
+        elementoNuevo = "\n\t\t\t\t\t<div class=\"item-actividad\">\n\t\t\t\t\t\t<span name=\"optActividad\" onclick=\"counterValues(this.id, 'mensajeRespuestaForm')\" class=\"la-actividad editable\" role=\"input\" type=\"text\" data-placeholder=\"Actividad ".concat(posterior + 1, "\" id=\"inpActiv").concat(posterior, "\" contenteditable></span>\n\t\t\t\t\t</div>");
         divDisplayActividades.insertAdjacentHTML('afterbegin', elementoNuevo);
       }
 
@@ -2710,12 +2710,12 @@ function cargarModuloActividades() {
 }
 
 function guardarDescripcionActividad() {
-  var inputActividad = document.getElementById('inputActividad');
+  var inpRandomActividad = document.getElementById('inpRandomActividad');
   var messageRandomContainer = document.getElementById('messageRandomContainer');
   var db = getDatabase();
   var KEY = localStorage.getItem('RFC_KEY');
   var USER_APP = localStorage.getItem('USER_APP');
-  var valorActividad = decodeCaracteres(inputActividad.textContent);
+  var valorActividad = inpRandomActividad.textContent ? decodeCaracteres(inpRandomActividad.textContent) : '';
 
   if (valorActividad !== '') {
     return getMaxIdActividad(KEY, USER_APP).then(function (key) {
@@ -2725,7 +2725,7 @@ function guardarDescripcionActividad() {
       }, function (err) {
         console.error(err);
       }, function () {
-        inputActividad.textContent = '';
+        inpRandomActividad.textContent = '';
         messageRandomContainer.innerHTML = '';
         return mostrarActividadesRegistradas({
           descripcion_actividad: valorActividad,
@@ -2736,7 +2736,7 @@ function guardarDescripcionActividad() {
       });
     });
   } else {
-    messageRandomContainer.innerHTML = 'No contiene descripción su actividad';
+    messageRandomContainer.innerHTML = 'Debe contener una descripción la actividad';
   }
 }
 
@@ -2946,19 +2946,19 @@ function crearAreaEditarRandomActividad(objectString) {
   var object = JSON.parse(objectString.replace(/'/g, '"')); // console.warn(object)
 
   var btGuardarRandom = document.getElementById('btGuardarRandom');
-  var inputActividad = document.getElementById('inputActividad');
+  var inpRandomActividad = document.getElementById('inpRandomActividad');
   btGuardarRandom.innerHTML = 'ACTUALIZAR'; // btGuardarRandom.setAttribute('onclick', `actualizarRandomActividad("${objectString}")`);
 
   btGuardarRandom.setAttribute('onclick', "actualizarRandomActividad(" + objectString + ")");
-  inputActividad.innerHTML = object.descripcion_actividad;
+  inpRandomActividad.innerHTML = object.descripcion_actividad;
 }
 
 function actualizarRandomActividad(object) {
   var db = getDatabase();
-  var inputActividad = document.getElementById('inputActividad');
+  var inpRandomActividad = document.getElementById('inpRandomActividad');
   var messageRandomContainer = document.getElementById('messageRandomContainer');
   var btGuardarRandom = document.getElementById('btGuardarRandom');
-  var value = inputActividad.textContent;
+  var value = inpRandomActividad.textContent;
   return new Promise(function (resolve, reject) {
     if (value !== '') {
       resolve();
@@ -2976,7 +2976,7 @@ function actualizarRandomActividad(object) {
     });
   }).then(function () {
     messageRandomContainer.innerHTML = "Registro actualizado. [".concat(object.id_actividad, "]");
-    inputActividad.innerHTML = '';
+    inpRandomActividad.innerHTML = '';
     btGuardarRandom.setAttribute('onclick', "guardarDescripcionActividad()");
     btGuardarRandom.innerHTML = 'GUARDAR';
     var element = document.getElementById('randomId-' + object.id_actividad);
@@ -3290,7 +3290,7 @@ function htmlRandomActividades() {
     optionsBarFloar.insertAdjacentHTML('afterbegin', "\n\t\t\t<button id=\"backDates\" class=\"btn-otros\" onclick=\"regresaFechasActual()\">\n\t\t\t\t<span class=\"material-icons\">low_priority</span>\n\t\t\t</button>");
   }
 
-  var html = "\n\t\t<div class=\"random-module\">\n\t\t\t<!--HEADER-->\n\t\t\t<div class=\"header-module\"></div>\n\t\t\t<!--HEADER-->\n\t\t\t\t<!--MODULO-->\n\t\t\t<div class=\"container-module\">\n\t\t\t\t<div class=\"calendar-area\">\n\t\t\t\t\t<div class=\"preview-calendar\" id=\"calendar3\"></div>\n\t\t\t\t\t<div class=\"options-calendar\">\n\t\t\t\t\t\t<div class=\"info-group\" id=\"infoRandomSeleccion\"></div>\n\t\t\t\t\t\t<div class=\"buttons-container\" id=\"randomSeleccionBtns\">\n\t\t\t\t\t\t\t<!--<button  class=\"btn-regular\" onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">getArray</button>-->\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"messages-container\" id=\"messageRandomContainer\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t\t<div class=\"actividades-area\">\n\t\t\t\t\t<!--FORM-->\n\t\t\t\t\t<div class=\"formulario\">\n\t\t\t\t\t\t<span \n\t\t\t\t\t\t\tname=\"optActividad\" \n\t\t\t\t\t\t\tonclick=\"counterValues(this.id)\" \n\t\t\t\t\t\t\tclass=\"input-actividad editable\" \n\t\t\t\t\t\t\trole=\"input\" type=\"text\" \n\t\t\t\t\t\t\tdata-placeholder=\"Descripci\xF3n de la actividad\" \n\t\t\t\t\t\t\tid=\"inputActividad\" \n\t\t\t\t\t\t\tcontenteditable>\n\t\t\t\t\t\t</span>\n\t\t\t\t\t\t<button class=\"btn-regular\" onclick=\"guardarDescripcionActividad()\" id=\"btGuardarRandom\">GUARDAR</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--FORM-->\n\n\t\t\t\t\t<!--ACTS-->\n\t\t\t\t\t<div class=\"despliegue-actividades\" id=\"listaActividades\">\n\t\t\t\t\t\t<!--<div class=\"item-act-random\">\n\t\t\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t\t\t<div class=\"random-ref\">100</div>\n\t\t\t\t\t\t\t\t<div class=\"description-ref\">\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\" >edit</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\">delete_forever</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>-->\n\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--ACTS-->\n\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t</div>\n\t\t\t\t<!--MODULO-->\n\n\t\t</div>\n\t");
+  var html = "\n\t\t<div class=\"random-module\">\n\t\t\t<!--HEADER-->\n\t\t\t<div class=\"header-module\">\n\t\t\t\t<div class=\"title-header\">GENERAR ACTIVIDADES ALEATORIAS</div>\t\n\t\t\t</div>\n\t\t\t<!--HEADER-->\n\t\t\t\t<!--MODULO-->\n\t\t\t<div class=\"container-module\">\n\t\t\t\t<div class=\"calendar-area\">\n\t\t\t\t\t<div class=\"preview-calendar\" id=\"calendar3\"></div>\n\t\t\t\t\t<div class=\"options-calendar\">\n\t\t\t\t\t\t<div class=\"info-group\" id=\"infoRandomSeleccion\"></div>\n\t\t\t\t\t\t<div class=\"buttons-container\" id=\"randomSeleccionBtns\">\n\t\t\t\t\t\t\t<!--<button  class=\"btn-regular\" onclick=\"leerArreglo(".concat(JSON.stringify(_arrayDates), ")\">getArray</button>-->\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"messages-container\" id=\"messageRandomContainer\"></div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t\t<div class=\"actividades-area\">\n\t\t\t\t\t<!--FORM-->\n\t\t\t\t\t<div class=\"formulario\">\n\t\t\t\t\t\t<span \n\t\t\t\t\t\t\tname=\"randomActividad\" \n\t\t\t\t\t\t\tonclick=\"counterValues(this.id, 'messageRandomContainer')\" \n\t\t\t\t\t\t\tclass=\"input-actividad\" \n\t\t\t\t\t\t\trole=\"input\" \n\t\t\t\t\t\t\ttype=\"text\" \n\t\t\t\t\t\t\tdata-placeholder=\"Descripci\xF3n de la actividad\" \n\t\t\t\t\t\t\tid=\"inpRandomActividad\" \n\t\t\t\t\t\t\tcontenteditable></span>\n\t\t\t\t\t\t<button class=\"btn-regular\" onclick=\"guardarDescripcionActividad()\" id=\"btGuardarRandom\">GUARDAR</button>\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--FORM-->\n\n\t\t\t\t\t<!--ACTS-->\n\t\t\t\t\t<div class=\"despliegue-actividades\" id=\"listaActividades\">\n\t\t\t\t\t\t<!--<div class=\"item-act-random\">\n\t\t\t\t\t\t\t<div class=\"agarrate-act\">\n\t\t\t\t\t\t\t\t<div class=\"random-ref\">100</div>\n\t\t\t\t\t\t\t\t<div class=\"description-ref\">\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t\t\xF1kasdasdm asd asd as da dsasd asd a ds\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class=\"options-act-random\">\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\" >edit</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"option-act\">\n\t\t\t\t\t\t\t\t\t<span class=\"material-icons\">delete_forever</span>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>-->\n\n\t\t\t\t\t</div>\n\t\t\t\t\t<!--ACTS-->\n\n\t\t\t\t</div>\n\t\t\t\t<!--ACTIVIDADES-->\n\t\t\t</div>\n\t\t\t\t<!--MODULO-->\n\n\t\t</div>\n\t");
   console.log(areaOtrosRegistros);
   areaOtrosRegistros.innerHTML = html;
   areaOtrosRegistros.style.display = 'flex';
@@ -3351,7 +3351,7 @@ var htmlDisableDaysCalendar = function htmlDisableDaysCalendar() {
     optionsBarFloar.insertAdjacentHTML('afterbegin', "\n\t\t\t<button id=\"backDates\" class=\"btn-otros\" onclick=\"regresaFechasActual()\">\n\t\t\t\t<span class=\"material-icons\">low_priority</span>\n\t\t\t</button>");
   }
 
-  var html = "\n\t\t<div class=\"title-similares\">\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tASIGNAR ESTADO DE FECHAS\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tMarcar d\xEDas seg\xFAn como se cumpli\xF3 o se cumplir\xE1 la jornada laboral\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"content-disable\">\n\t\t\t<div class=\"content-area\">\n\t\t\t\t<div class=\"calendar-area\" id=\"parentCalendar\"></div>\t\n\t\t\t\t<div class=\"calendar-options\">\n\t\t\t\t\t\t<div class=\"options-select\">\n\t\t\t\t\t\t\t<div class=\"option\">Marcar c\xF3mo:</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 2)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-vacaciones\" ></div>\n\t\t\t\t\t\t\t\t\tVacaciones\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 1)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-permiso\"></div>\n\t\t\t\t\t\t\t\t\tPermiso\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 3)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-oficina\"></div>\n\t\t\t\t\t\t\t\t\tSe labor\xF3 en oficinas\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 10)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark\"></div>\n\t\t\t\t\t\t\t\t\tLimpiar\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\n\t\t\t</div>\n\t\t\t<div class=\"info-area\"></div>\n\t\t</div>\n\t";
+  var html = "\n\t\t<div class=\"title-similares\">\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tASIGNAR ESTADO DE FECHAS\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<div class=\"row-title-similar\">\n\t\t\t\t<div class=\"item-similar\">\n\t\t\t\t\tMarcar d\xEDas en calendario seg\xFAn sea requerido\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"content-disable\">\n\t\t\t<div class=\"content-area\">\n\t\t\t\t<div class=\"calendar-area\" id=\"parentCalendar\"></div>\t\n\t\t\t\t<div class=\"calendar-options\">\n\t\t\t\t\t\t<div class=\"options-select\">\n\t\t\t\t\t\t\t<div class=\"option\">Marcar c\xF3mo:</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 2)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-vacaciones\" ></div>\n\t\t\t\t\t\t\t\t\tVacaciones\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 1)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-permiso\"></div>\n\t\t\t\t\t\t\t\t\tPermiso\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 3)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark status-oficina\"></div>\n\t\t\t\t\t\t\t\t\tSe labor\xF3 en oficinas\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div \n\t\t\t\t\t\t\t\tclass=\"option seleccionable\" \n\t\t\t\t\t\t\t\tvalor=\"null\" \n\t\t\t\t\t\t\t\tname=\"valuesModMarcado\" \n\t\t\t\t\t\t\t\tonclick=\"marcarComo(this, 10)\">\n\t\t\t\t\t\t\t\t\t<div class=\"mark\"></div>\n\t\t\t\t\t\t\t\t\tLimpiar\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t</div>\t\n\n\t\t\t</div>\n\t\t\t<div class=\"info-area\"></div>\n\t\t</div>\n\t";
   areaOtrosRegistros.innerHTML = html; // const globalArray = 
 
   getDatesSegunStatus() // .then( array => console.log(array) )

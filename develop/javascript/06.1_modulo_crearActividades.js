@@ -6,14 +6,14 @@ function cargarModuloActividades(){
 }
 
 function guardarDescripcionActividad(){
-	const inputActividad = document.getElementById('inputActividad');
+	const inpRandomActividad = document.getElementById('inpRandomActividad');
 	const messageRandomContainer = document.getElementById('messageRandomContainer');
 	const db = getDatabase();
 	const KEY = localStorage.getItem('RFC_KEY');
 	const USER_APP = localStorage.getItem('USER_APP');
 
 
-	let valorActividad = decodeCaracteres(inputActividad.textContent); 
+	let valorActividad = inpRandomActividad.textContent ? decodeCaracteres(inpRandomActividad.textContent) : ''; 
 
 	if (valorActividad !== '') {
 		return getMaxIdActividad(KEY, USER_APP)
@@ -24,13 +24,13 @@ function guardarDescripcionActividad(){
 			},function(err){
 				console.error(err)	
 			}, function(){
-				inputActividad.textContent = '';
+				inpRandomActividad.textContent = '';
 				messageRandomContainer.innerHTML = '';
 				return mostrarActividadesRegistradas({ descripcion_actividad: valorActividad, id_actividad: (key+1), rfcusuario: KEY, claveusr: USER_APP });			
 			})
 		})
 	} else {
-		messageRandomContainer.innerHTML = 'No contiene descripción su actividad';
+		messageRandomContainer.innerHTML = 'Debe contener una descripción la actividad';
 	}
 }
 
@@ -262,19 +262,19 @@ function crearAreaEditarRandomActividad(objectString){
 	let object = JSON.parse(objectString.replace(/'/g,'"'));
 	// console.warn(object)
 	const btGuardarRandom = document.getElementById('btGuardarRandom');
-	const inputActividad = document.getElementById('inputActividad');
+	const inpRandomActividad = document.getElementById('inpRandomActividad');
 	btGuardarRandom.innerHTML = 'ACTUALIZAR'
 	// btGuardarRandom.setAttribute('onclick', `actualizarRandomActividad("${objectString}")`);
 	btGuardarRandom.setAttribute('onclick', "actualizarRandomActividad(" + objectString +")");
-	inputActividad.innerHTML = object.descripcion_actividad
+	inpRandomActividad.innerHTML = object.descripcion_actividad
 }
 
 function actualizarRandomActividad(object){
 	const db = getDatabase()
-	const inputActividad = document.getElementById('inputActividad');
+	const inpRandomActividad = document.getElementById('inpRandomActividad');
 	const messageRandomContainer = document.getElementById('messageRandomContainer');
 	const btGuardarRandom = document.getElementById('btGuardarRandom');
-	let value = inputActividad.textContent; 
+	let value = inpRandomActividad.textContent; 
 
 	return new Promise(function(resolve, reject){
 		if(value !== ''){
@@ -295,7 +295,7 @@ function actualizarRandomActividad(object){
 	})
 	.then(function(){
 		messageRandomContainer.innerHTML = `Registro actualizado. [${object.id_actividad}]`		
-		inputActividad.innerHTML = '';
+		inpRandomActividad.innerHTML = '';
 		btGuardarRandom.setAttribute('onclick', `guardarDescripcionActividad()`);
 		btGuardarRandom.innerHTML = 'GUARDAR'
 		const element = document.getElementById('randomId-'+object.id_actividad);

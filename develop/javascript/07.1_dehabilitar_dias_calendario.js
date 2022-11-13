@@ -39,7 +39,7 @@ const htmlDisableDaysCalendar = () => {
 			</div>
 			<div class="row-title-similar">
 				<div class="item-similar">
-					Marcar días según como se cumplió o se cumplirá la jornada laboral
+					Marcar días en calendario según sea requerido
 				</div>
 			</div>
 		</div>

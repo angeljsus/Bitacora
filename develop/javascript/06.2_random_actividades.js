@@ -37,7 +37,9 @@ function htmlRandomActividades(){
 	let html = `
 		<div class="random-module">
 			<!--HEADER-->
-			<div class="header-module"></div>
+			<div class="header-module">
+				<div class="title-header">GENERAR ACTIVIDADES ALEATORIAS</div>	
+			</div>
 			<!--HEADER-->
 				<!--MODULO-->
 			<div class="container-module">
@@ -56,14 +58,14 @@ function htmlRandomActividades(){
 					<!--FORM-->
 					<div class="formulario">
 						<span 
-							name="optActividad" 
-							onclick="counterValues(this.id)" 
-							class="input-actividad editable" 
-							role="input" type="text" 
+							name="randomActividad" 
+							onclick="counterValues(this.id, 'messageRandomContainer')" 
+							class="input-actividad" 
+							role="input" 
+							type="text" 
 							data-placeholder="Descripción de la actividad" 
-							id="inputActividad" 
-							contenteditable>
-						</span>
+							id="inpRandomActividad" 
+							contenteditable></span>
 						<button class="btn-regular" onclick="guardarDescripcionActividad()" id="btGuardarRandom">GUARDAR</button>
 					</div>
 					<!--FORM-->
