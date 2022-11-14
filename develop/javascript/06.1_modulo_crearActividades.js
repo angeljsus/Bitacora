@@ -126,47 +126,6 @@ function convertToStringParams(object){
 	return params;
 }
 
-// function leerFechasRandom(){
-// 	const inpInicio = document.getElementById('inpInicio');
-// 	const inpFin = document.getElementById('inpFin');
-// 	let inicio = inpInicio.value;
-// 	const messageActRandom = document.getElementById('messageActRandom')
-// 	let fin = inpFin.value;
-// 	return new Promise(function(resolve, reject){
-// 		if (inicio !== '' && fin !== '') {
-// 			// console.log('A validar', inicio, fin)
-// 			resolve(obtenerFechasDe(inicio, fin))
-// 		} else {
-// 			reject('No hay valores en las fechas')
-// 		}
-// 	})
-// 	.then(function(object){
-// 		const checkerList = document.getElementsByName('checkerList');
-// 		let seleccionadas = [];
-// 		let count = 0;
-// 		// let numbers = [3,4,5];
-// 		// let random = Math.floor(Math.random()*numbers.length);
-// 		let message = 'No a seleccionado ninguna actividad';
-
-// 		 checkerList.forEach(function(item){
-// 		 	if(item.checked){
-// 				seleccionadas.push(item.id)
-// 				count++;
-// 		 	}
-// 		})
-// 		if (count >= 5) {
-// 			return crearActividadesRandom(object, seleccionadas);
-// 		} else {
-// 			message = 'Seleccionar al menos 5 actividades seleccionadas: '+count;
-// 		}
-
-// 		return Promise.reject(message);
-// 	})
-// 	.catch(function(err){
-// 		messageActRandom.innerHTML = err;
-// 	})
-// }
-
 function getInicioHomeOffice(rfc, user){
 	const db = getDatabase();
 	return new Promise(function(resolve, reject){
@@ -180,16 +139,6 @@ function getInicioHomeOffice(rfc, user){
 	})
 }
 
-// function obtenerFechasDe(inicio, fin, rfc){
-// 	let fechaInicio = crearObjectFecha(inicio); 
-// 	let fechaFin = crearObjectFecha(fin);
-// 	let KEY = localStorage.getItem('RFC_KEY');
-// 	if (fechaInicio <= fechaFin) {
-// 		return validacionesHomeOffice(inicio, KEY, fechaFin)
-// 	}
-// 	return Promise.reject('La fecha de fin no puede ser menor')
-
-// }
 
 // dd-mm-aaaa
 function crearObjectFecha(cadena){
@@ -203,41 +152,6 @@ function crearObjectFecha(cadena){
 		return null;
 	}
 }
-
-// function marcarActividadRandom(cadenaId, row){
-// 	let status = document.getElementById(cadenaId);
-// 	let padre = document.getElementById(row);
-// 	console.log(status)
-// 	console.log(row)
-// 	if (!status.checked) {
-// 		padre.classList.add('marked');
-// 	} else {
-// 		padre.classList.remove('marked');
-// 	}
-// }
-
-// function deleteRegistrosPrevios(object, rfc, user){
-// 	const db = getDatabase()
-// 	let valuesIn = JSON.stringify(object);
-// 	valuesIn = valuesIn.replace(/\]/g,')')
-// 	valuesIn = valuesIn.replace(/\[/g,'(')
-
-// 	console.log(JSON.stringify(object).toString())
-// 	return new Promise(function(resolve, reject){
-// 		db.transaction(function(tx){
-// 			// console.log(`DELETE FROM TBL_CAMPOS WHERE fecha in ${valuesIn} AND rfcusuario = ${rfc} AND claveusr ="${user}"`)
-// 			tx.executeSql(`DELETE FROM TBL_CAMPOS WHERE fecha in ${valuesIn} AND rfcusuario = ? AND claveusr =?`,[ rfc, user])
-// 		},function(err){
-// 			reject(err)
-// 		}, function(){
-// 			// console.log('Elimino correctamente')
-// 			resolve()
-// 		})
-// 	})
-
-// }
-
-
 
 function deleteRandomActividad(idElemento, objectString){
 	let object = JSON.parse(objectString.replace(/'/g,'"'));
@@ -387,7 +301,7 @@ const marcarFechas = array => {
 		</div>
 		`;
 		randomSeleccionBtns.innerHTML=`
-			<button  class="btn-option" id="generatorId" onclick="leerArreglo(${JSON.stringify(_arrayDates)})">GENERAR</button>
+			<button  class="btn-option" id="generatorId">GENERAR</button>
 			<button  class="btn-option" id="cancelableId">CANCELAR</button>
 		`;
 		const messageRandomContainer = document.getElementById('messageRandomContainer');
@@ -397,12 +311,7 @@ const marcarFechas = array => {
 	.then( () => {
 		const cancelableId = document.getElementById('cancelableId');
 		cancelableId.onclick = () => {
-				return desmarcarMarcar()
-				.then( () => {
-					_arrayDates.splice(0,_arrayDates.length)
-					randomSeleccionBtns.innerHTML = '';
-					infoRandomSeleccion.innerHTML = '';
-				});
+				return cancelarRandomSelection()
 		}
 	})
 	.then( () => {
@@ -459,10 +368,6 @@ const generarActividadesRandom = (arrayActividades, arrayDatesSeleccion) => {
 	.then( () => desmarcarMarcar() ) 
 	.then( () => _arrayDates.splice(0,_arrayDates.length) )
 	.then( () => messageRandomContainer.innerHTML = `Se generaron actividades para ${datesEnabled.length} fecha${datesEnabled.length > 1 ? 's' : ''}.`)
-	
-
-	// return Promise.resolve()
-
 }
 
 const insertarRandomActividades = queryTxt => {
@@ -559,9 +464,13 @@ const  deleteRegistrosPrevios = (object, rfc, user) => {
 	})
 }
 
-const cancelarRandomSelection = arrayMarked => {
+const cancelarRandomSelection = () => {
+	const randomSeleccionBtns = document.getElementById('randomSeleccionBtns');
+	const infoRandomSeleccion = document.getElementById('infoRandomSeleccion');
 	return desmarcarMarcar()
-	.then( array => {
-		console.log(arrayMarked)
+	.then( () => {
+		_arrayDates.splice(0,_arrayDates.length)
+		randomSeleccionBtns.innerHTML = '';
+		infoRandomSeleccion.innerHTML = '';
 	});
 }

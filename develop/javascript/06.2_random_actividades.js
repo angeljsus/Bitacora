@@ -47,9 +47,7 @@ function htmlRandomActividades(){
 					<div class="preview-calendar" id="calendar3"></div>
 					<div class="options-calendar">
 						<div class="info-group" id="infoRandomSeleccion"></div>
-						<div class="buttons-container" id="randomSeleccionBtns">
-							<!--<button  class="btn-regular" onclick="leerArreglo(${JSON.stringify(_arrayDates)})">getArray</button>-->
-						</div>
+						<div class="buttons-container" id="randomSeleccionBtns"></div>
 						<div class="messages-container" id="messageRandomContainer"></div>
 					</div>
 				</div>

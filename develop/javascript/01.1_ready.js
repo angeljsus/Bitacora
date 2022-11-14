@@ -1,4 +1,4 @@
-// const Excel = require('exceljs');
+const Excel = require('exceljs');
 const fs = require('fs-extra');
 
 window.addEventListener('DOMContentLoaded', existeSesionIniciada);

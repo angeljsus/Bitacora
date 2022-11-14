@@ -2,10 +2,10 @@ const { app, BrowserWindow, globalShortcut } = require('electron')
 const path = require('path')
 
 
-require('electron-reload')(__dirname, {
-    electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
-    hardResetMethod: 'exit'
-});
+// require('electron-reload')(__dirname, {
+//     electron: path.join(__dirname, 'node_modules', '.bin', 'electron'),
+//     hardResetMethod: 'exit'
+// });
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
@@ -21,7 +21,7 @@ function createWindow () {
       nodeIntegration: true,
       contextIsolation: false,
       nativeWindowOpen: true,
-      devTools: true,
+      devTools: false,
       preload: path.join(__dirname, 'preload.js'),
     }
   })

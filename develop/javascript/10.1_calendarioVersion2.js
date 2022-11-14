@@ -184,8 +184,13 @@ const getCalendario  = (options, slideElement) => {
 						diaSeleccionado[i].style.backgroundColor = '#bb9457';
 
 						if(options.sinceTo.length === 2){
-							options.sinceTo.shift();	
-							options.sinceTo.push(fechaFinal)
+							return cancelarRandomSelection()
+							.then( () => {
+								diaSeleccionado[i].style.backgroundColor = '#bb9457';
+								options.sinceTo.push(fechaFinal)
+							})
+
+							// options.sinceTo.shift();	
 						} else {
 							options.sinceTo.push(fechaFinal)
 						}

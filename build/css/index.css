@@ -1090,7 +1090,7 @@ div {
   font-size: 0.9em;
 }
 .calendar-container .calendar .row-calendar .day:hover {
-  background: #a8dadc;
+  border: 2px solid rgba(0,0,0,0.2);
 }
 .calendar-container .calendar .row-calendar .day-selected {
   background: #80ed99;
