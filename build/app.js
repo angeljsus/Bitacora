@@ -25,7 +25,9 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js'),
     }
   })
+  mainWindow.setMenu(null);
 
+  process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
   mainWindow.loadFile('index.html')
   // eliminar la barra de menu
   // mainWindow.removeMenu()
